@@ -70,7 +70,8 @@
               "buildTarget": "ez-booking:build:production"
             },
             "development": {
-              "buildTarget": "ez-booking:build:development"
+              "buildTarget": "ez-booking:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
