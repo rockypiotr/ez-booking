@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^19.1.5",
     "@angular/platform-browser-dynamic": "^19.1.5",
     "@angular/router": "^19.1.5",
+    "@ngrx/store": "^19.0.1",
     "chart.js": "^4.4.7",
     "primeicons": "^7.0.0",
     "primeng": "^19.0.6",

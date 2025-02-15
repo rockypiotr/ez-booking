@@ -6,23 +6,21 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
 import { themePreset } from './theme-preset';
+import { provideStore } from '@ngrx/store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(
-      routes,
-      withHashLocation(),
-      withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' })
-    ),
+    provideRouter(routes, withHashLocation(), withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' })),
     provideHttpClient(),
     provideAnimationsAsync(),
     providePrimeNG({
-      ripple: true,
-      theme: {
-        preset: themePreset,
-        options: { darkModeSelector: '.app-dark' },
-      },
+        ripple: true,
+        theme: {
+            preset: themePreset,
+            options: { darkModeSelector: '.app-dark' },
+        },
     }),
-  ],
+    provideStore()
+],
 };
