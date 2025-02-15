@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b8f8d663-c015-4561-9ec9-89bac603e8a2" name="Changes" comment="moved files to frontend directory">
+      <change beforePath="$PROJECT_DIR$/Frontend/src/app/pages/service/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/pages/service/auth.service.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2siMjwRDrOSzs56xE6lIRS2pPEi" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Harnas/WebstormProjects/ez-booking&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;npm.Angular CLI Server.executor&quot;: &quot;Run&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\Harnas\\WebstormProjects\\ez-booking\\Frontend\\node_modules\\prettier&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Harnas\\WebstormProjects\\ez-booking\\Frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;typescript.add.unambiguous.imports.on.the.fly&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ],
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;JSON&quot;,
+      &quot;GitIgnore&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Harnas\WebstormProjects\ez-booking\src\app\pages\appointment\appointment-modal" />
+      <recent name="C:\Users\Harnas\WebstormProjects\ez-booking\src\app" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Harnas\WebstormProjects\ez-booking\src\app\components" />
+      <recent name="C:\Users\Harnas\WebstormProjects\ez-booking\src\assets" />
+      <recent name="C:\Users\Harnas\WebstormProjects\ez-booking\src\app\pages\appointment\appointment-modal" />
+      <recent name="C:\Users\Harnas\WebstormProjects\ez-booking\src\app\pages" />
+      <recent name="C:\Users\Harnas\WebstormProjects\ez-booking\src\app" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="a" />
+    </option>
+  </component>
+  <component name="RunManager" selected="npm.Angular CLI Server">
+    <configuration name="Angular Application" type="JavascriptDebugType" uri="http://localhost:4200">
+      <method v="2" />
+    </configuration>
+    <configuration name="Angular CLI Server" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/Frontend/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-WS-243.23654.157" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b8f8d663-c015-4561-9ec9-89bac603e8a2" name="Changes" comment="" />
+      <created>1738934081896</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1738934081896</updated>
+      <workItem from="1738934083656" duration="937000" />
+      <workItem from="1739193457371" duration="5366000" />
+      <workItem from="1739278276682" duration="5810000" />
+      <workItem from="1739286557481" duration="96000" />
+      <workItem from="1739286658757" duration="5471000" />
+      <workItem from="1739366937396" duration="10111000" />
+      <workItem from="1739449899337" duration="21000" />
+      <workItem from="1739452372154" duration="9617000" />
+      <workItem from="1739631192309" duration="1026000" />
+      <workItem from="1739632235548" duration="19000" />
+      <workItem from="1739632266611" duration="703000" />
+    </task>
+    <task id="LOCAL-00001" summary="init">
+      <option name="closed" value="true" />
+      <created>1739281626967</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739281626967</updated>
+    </task>
+    <task id="LOCAL-00002" summary="update all dependencies to latest versions">
+      <option name="closed" value="true" />
+      <created>1739285992887</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1739285992887</updated>
+    </task>
+    <task id="LOCAL-00003" summary="set up primeng template">
+      <option name="closed" value="true" />
+      <created>1739288180091</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1739288180091</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Add base login page">
+      <option name="closed" value="true" />
+      <created>1739385244175</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1739385244175</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added proxy configuration">
+      <option name="closed" value="true" />
+      <created>1739385258529</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1739385258529</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Add base login page">
+      <option name="closed" value="true" />
+      <created>1739385272671</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1739385272671</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Update login button">
+      <option name="closed" value="true" />
+      <created>1739631795825</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1739631795825</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Add init theme preset">
+      <option name="closed" value="true" />
+      <created>1739631816409</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1739631816409</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Add abstract base modal class">
+      <option name="closed" value="true" />
+      <created>1739631882254</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1739631882254</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Add init appointment modal">
+      <option name="closed" value="true" />
+      <created>1739631952848</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1739631952848</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Custom employee selector control">
+      <option name="closed" value="true" />
+      <created>1739631982127</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1739631982127</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Custom time picker control">
+      <option name="closed" value="true" />
+      <created>1739631996419</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1739631996419</updated>
+    </task>
+    <task id="LOCAL-00013" summary="moved files to frontend directory">
+      <option name="closed" value="true" />
+      <created>1739632534055</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1739632534055</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init" />
+    <MESSAGE value="update all dependencies to latest versions" />
+    <MESSAGE value="set up primeng template" />
+    <MESSAGE value="Added proxy configuration" />
+    <MESSAGE value="Add base login page" />
+    <MESSAGE value="Update login button" />
+    <MESSAGE value="Add init theme preset" />
+    <MESSAGE value="Add abstract base modal class" />
+    <MESSAGE value="Add init appointment modal" />
+    <MESSAGE value="Custom employee selector control" />
+    <MESSAGE value="Custom time picker control" />
+    <MESSAGE value="moved files to frontend directory" />
+    <option name="LAST_COMMIT_MESSAGE" value="moved files to frontend directory" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/main.ts</url>
+          <line>1</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/app/pages/uikit/buttondemo.ts</url>
+          <line>26</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/app/components/time-picker/time-picker.component.ts</url>
+          <line>38</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
