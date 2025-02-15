@@ -1,0 +1,12 @@
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.option-item {
+  transition: var(--transition-duration);
+
+  &:not(.active) {
+    @apply grayscale;
+  }
+}

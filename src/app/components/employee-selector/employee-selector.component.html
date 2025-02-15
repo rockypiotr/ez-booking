@@ -1,0 +1,15 @@
+<ul [ngClass]="{ disabled: !disabled }" class="flex flex-row gap-8">
+  @for (employee of options(); track employee.id) {
+    <li class="flex flex-col cursor-pointer" (click)="setValue(employee)">
+      <img
+        class="rounded-full option-item"
+        [ngClass]="{ active: value === employee }"
+        [ngSrc]="employee.imgUrl"
+        width="100"
+        height="100"
+        alt="employeeImage"
+      />
+      <span class="text-center mt-2">{{ employee.label }}</span>
+    </li>
+  }
+</ul>
