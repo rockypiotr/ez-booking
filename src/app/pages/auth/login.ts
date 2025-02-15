@@ -47,6 +47,7 @@ import { AuthService } from '../service/auth.service';
             pButton
             [rounded]="true"
             pRipple
+            [raised]="true"
             class="w-full"
             label="Get started"
             type="submit"
