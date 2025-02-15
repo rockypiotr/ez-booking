@@ -13,9 +13,9 @@ import {
   CreateAppointmentRequest,
 } from '../../../@shared/api/appointment';
 import { EmployeeSelectorOption } from '../../../@shared/api/employee-selector';
-import { BaseModalComponent } from '../../../components/base-modal/base-modal.component';
-import { EmployeeSelectorComponent } from '../../../components/employee-selector/employee-selector.component';
-import { TimePickerComponent } from '../../../components/time-picker/time-picker.component';
+import { BaseModalComponent } from '../../../@shared/components/base-modal/base-modal.component';
+import { EmployeeSelectorComponent } from '../../../@shared/components/employee-selector/employee-selector.component';
+import { TimePickerComponent } from '../../../@shared/components/time-picker/time-picker.component';
 import { AppointmentService } from '../../service/appointment.service';
 
 @Component({

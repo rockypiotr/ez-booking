@@ -13,7 +13,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { EmployeeSelectorOption } from '../../@shared/api/employee-selector';
+import { EmployeeSelectorOption } from '../../api/employee-selector';
 
 @Component({
   selector: 'app-employee-selector',

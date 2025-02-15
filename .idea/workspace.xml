@@ -4,32 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b8f8d663-c015-4561-9ec9-89bac603e8a2" name="Changes" comment="moved files to frontend directory">
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/.idea/sonarlint.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/src/main/java/org/example/UserServiceApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/src/main/java/org/example/config/CorsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/src/main/java/org/example/config/EnvConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/src/main/java/org/example/config/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/src/main/java/org/example/controller/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/src/main/java/org/example/model/dto/LoginRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/src/main/java/org/example/model/dto/LoginResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/src/main/java/org/example/model/dto/RegisterRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/src/main/java/org/example/model/dto/RegisterResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/src/main/java/org/example/model/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/src/main/java/org/example/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/src/main/java/org/example/security/JwtTokenProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/src/main/java/org/example/service/AuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/user-service/src/main/resources/data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/gateway-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/gateway-service/pom.xml" afterDir="false" />
-    </list>
+    <list default="true" id="b8f8d663-c015-4561-9ec9-89bac603e8a2" name="Changes" comment="moved files to frontend directory" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -144,7 +119,7 @@
       <workItem from="1739452372154" duration="9617000" />
       <workItem from="1739631192309" duration="1026000" />
       <workItem from="1739632235548" duration="19000" />
-      <workItem from="1739632266611" duration="1774000" />
+      <workItem from="1739632266611" duration="2004000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
