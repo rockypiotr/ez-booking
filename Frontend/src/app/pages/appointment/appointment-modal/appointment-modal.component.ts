@@ -73,8 +73,6 @@ export class AppointmentModalComponent extends BaseModalComponent implements OnI
         time: [null, [Validators.required]],
       }),
     });
-
-    console.log('form', this.form.getRawValue());
   }
 
   validateForm() {
