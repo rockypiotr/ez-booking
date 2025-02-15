@@ -1,0 +1,8 @@
+.active {
+  color: var(--p-button-primary-color);
+  background-color: var(--p-button-primary-background);
+}
+
+.p-chip {
+  transition: var(--transition-duration);
+}

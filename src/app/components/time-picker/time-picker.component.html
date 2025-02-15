@@ -1,0 +1,10 @@
+<div class="gap-3 flex cursor-pointer">
+  @for (time of options(); track time) {
+    <p-chip
+      pRipple
+      [label]="time"
+      [ngClass]="{ active: time === value }"
+      (click)="setValue(time)"
+    ></p-chip>
+  }
+</div>
