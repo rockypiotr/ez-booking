@@ -3,9 +3,9 @@ import { provideRouter, withHashLocation, withInMemoryScrolling } from '@angular
 
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import Aura from '@primeng/themes/aura';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
+import { themePreset } from './theme-preset';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,7 +20,7 @@ export const appConfig: ApplicationConfig = {
     providePrimeNG({
       ripple: true,
       theme: {
-        preset: Aura,
+        preset: themePreset,
         options: { darkModeSelector: '.app-dark' },
       },
     }),
