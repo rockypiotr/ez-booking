@@ -7,8 +7,8 @@ import {
   AvailableAppointmentsResponse,
   CreateAppointmentRequest,
   CreateAppointmentResponse,
-} from '../../@shared/api/appointment';
-import { EmployeeSelectorOption } from '../../@shared/api/employee-selector';
+} from '../../@shared/models/appointment';
+import { EmployeeSelectorOption } from '../../@shared/models/employee-selector';
 
 @Injectable({
   providedIn: 'root',

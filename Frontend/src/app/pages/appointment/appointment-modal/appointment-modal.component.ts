@@ -7,15 +7,15 @@ import { Fluid } from 'primeng/fluid';
 import { Ripple } from 'primeng/ripple';
 import { Select } from 'primeng/select';
 import { tap } from 'rxjs';
+import { BaseModalComponent } from '../../../@shared/components/base-modal/base-modal.component';
+import { EmployeeSelectorComponent } from '../../../@shared/components/employee-selector/employee-selector.component';
+import { TimePickerComponent } from '../../../@shared/components/time-picker/time-picker.component';
 import {
   AvailableAppointmentsRequest,
   AvailableAppointmentsResponse,
   CreateAppointmentRequest,
-} from '../../../@shared/api/appointment';
-import { EmployeeSelectorOption } from '../../../@shared/api/employee-selector';
-import { BaseModalComponent } from '../../../@shared/components/base-modal/base-modal.component';
-import { EmployeeSelectorComponent } from '../../../@shared/components/employee-selector/employee-selector.component';
-import { TimePickerComponent } from '../../../@shared/components/time-picker/time-picker.component';
+} from '../../../@shared/models/appointment';
+import { EmployeeSelectorOption } from '../../../@shared/models/employee-selector';
 import { AppointmentService } from '../../service/appointment.service';
 
 @Component({

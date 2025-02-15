@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { LoginRequest, LoginResponse } from '../../@shared/api/auth';
+import { LoginRequest, LoginResponse } from '../../@shared/models/auth';
 
 interface ILoginData {
   username: string;
