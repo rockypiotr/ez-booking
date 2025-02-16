@@ -4,21 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b8f8d663-c015-4561-9ec9-89bac603e8a2" name="Changes" comment="[F] add ngrx">
-      <change afterPath="$PROJECT_DIR$/Frontend/src/app/@core/store/app.state.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/app/@core/store/auth/auth.action.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/app/@core/store/auth/auth.effects.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/app/@core/store/auth/auth.reducer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/app/@core/store/auth/auth.selectors.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/src/app/@core/store/auth/auth.state.ts" afterDir="false" />
+    <list default="true" id="b8f8d663-c015-4561-9ec9-89bac603e8a2" name="Changes" comment="[F] add authguard and moved token to store">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/pnpm-lock.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/app.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/app/layout/component/app.topbar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/layout/component/app.topbar.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/app/pages/auth/login.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/pages/auth/login.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/app/pages/service/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/app/pages/service/auth.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +132,7 @@
       <workItem from="1739632235548" duration="19000" />
       <workItem from="1739632266611" duration="2004000" />
       <workItem from="1739634296763" duration="5276000" />
-      <workItem from="1739707989660" duration="2144000" />
+      <workItem from="1739707989660" duration="2664000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -282,7 +270,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739636010541</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="[F] add authguard and moved token to store">
+      <option name="closed" value="true" />
+      <created>1739710308508</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1739710308508</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -305,7 +301,8 @@
     <MESSAGE value="[F] Moved interfaces from api to models" />
     <MESSAGE value="[F] removed console logs" />
     <MESSAGE value="[F] add ngrx" />
-    <option name="LAST_COMMIT_MESSAGE" value="[F] add ngrx" />
+    <MESSAGE value="[F] add authguard and moved token to store" />
+    <option name="LAST_COMMIT_MESSAGE" value="[F] add authguard and moved token to store" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

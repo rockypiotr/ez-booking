@@ -1,12 +1,13 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withHashLocation, withInMemoryScrolling } from '@angular/router';
 
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideEffects } from '@ngrx/effects';
 import { ActionReducer, MetaReducer, provideStore } from '@ngrx/store';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { providePrimeNG } from 'primeng/config';
+import { authInterceptor } from './@core/http/auth.interceptor';
 import { appReducers } from './@core/store/app.state';
 import { AuthEffects } from './@core/store/auth/auth.effects';
 import { routes } from './app.routes';
@@ -29,7 +30,7 @@ export const appConfig: ApplicationConfig = {
         scrollPositionRestoration: 'enabled',
       })
     ),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
     provideAnimationsAsync(),
     providePrimeNG({
       ripple: true,
