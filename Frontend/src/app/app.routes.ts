@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './@core/guards/auth.guard';
 import { AppLayout } from './layout/component/app.layout';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { Documentation } from './pages/documentation/documentation';
@@ -9,6 +10,7 @@ export const routes: Routes = [
   {
     path: '',
     component: AppLayout,
+    canActivate: [authGuard],
     children: [
       { path: '', component: Dashboard },
       { path: 'uikit', loadChildren: () => import('./pages/uikit/uikit.routes') },

@@ -6,14 +6,16 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { RippleModule } from 'primeng/ripple';
-import { tap } from 'rxjs';
-import { AuthService } from '../service/auth.service';
+import { AppState } from '../../@core/store/app.state';
+import { login } from '../../@core/store/auth/auth.action';
+import { LoginRequest } from '../../@shared/models/auth';
 
 @Component({
   selector: 'app-login',
@@ -63,42 +65,36 @@ import { AuthService } from '../service/auth.service';
 })
 export class Login implements OnInit {
   form!: FormGroup;
-
   private readonly fb = inject(FormBuilder);
-  private readonly authService = inject(AuthService);
-  private readonly router = inject(Router);
+  private readonly store = inject(Store<AppState>);
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.createForm();
   }
 
-  onLogin() {
+  onLogin(): void {
     this.validateForm();
     this.login();
   }
 
-  private createForm() {
+  private createForm(): void {
     this.form = this.fb.group({
       username: ['test', Validators.required],
       password: ['test', Validators.required],
     });
   }
 
-  private validateForm() {
+  private validateForm(): void {
     if (this.form.invalid) {
       throw new Error('Invalid form');
     }
   }
 
-  private login() {
-    this.authService
-      .login(this.form.getRawValue())
-      .pipe(
-        tap(({ token }) => {
-          this.authService.setCredentials(token);
-          this.router.navigate(['/']);
-        })
-      )
-      .subscribe();
+  private login(): void {
+    this.store.dispatch(login(this.getPayload()));
+  }
+
+  private getPayload(): LoginRequest {
+    return this.form.getRawValue();
   }
 }

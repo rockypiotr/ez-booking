@@ -1,15 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
 import { StyleClassModule } from 'primeng/styleclass';
+import { AppState } from '../../@core/store/app.state';
+import { logout } from '../../@core/store/auth/auth.action';
 import { LayoutService } from '../service/layout.service';
-import { AppConfigurator } from './app.configurator';
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [RouterModule, CommonModule, StyleClassModule, AppConfigurator],
+  imports: [RouterModule, CommonModule, StyleClassModule],
   template: ` <div class="layout-topbar">
     <div class="layout-topbar-logo-container">
       <button
@@ -54,28 +56,15 @@ import { AppConfigurator } from './app.configurator';
     <div class="layout-topbar-actions">
       <div class="layout-config-menu">
         <button type="button" class="layout-topbar-action" (click)="toggleDarkMode()">
+          @let isDarkTheme = layoutService.isDarkTheme();
           <i
             [ngClass]="{
               'pi ': true,
-              'pi-moon': layoutService.isDarkTheme(),
-              'pi-sun': !layoutService.isDarkTheme(),
+              'pi-moon': isDarkTheme,
+              'pi-sun': !isDarkTheme,
             }"
           ></i>
         </button>
-        <div class="relative">
-          <button
-            class="layout-topbar-action layout-topbar-action-highlight"
-            pStyleClass="@next"
-            enterFromClass="hidden"
-            enterActiveClass="animate-scalein"
-            leaveToClass="hidden"
-            leaveActiveClass="animate-fadeout"
-            [hideOnOutsideClick]="true"
-          >
-            <i class="pi pi-palette"></i>
-          </button>
-          <app-configurator />
-        </div>
       </div>
 
       <button
@@ -104,6 +93,10 @@ import { AppConfigurator } from './app.configurator';
             <i class="pi pi-user"></i>
             <span>Profile</span>
           </button>
+          <button type="button" class="layout-topbar-action" (click)="logout()">
+            <i class="pi pi-sign-out"></i>
+            <span>Profile</span>
+          </button>
         </div>
       </div>
     </div>
@@ -111,10 +104,14 @@ import { AppConfigurator } from './app.configurator';
 })
 export class AppTopbar {
   items!: MenuItem[];
-
-  constructor(public layoutService: LayoutService) {}
+  public readonly layoutService = inject(LayoutService);
+  private readonly store = inject(Store<AppState>);
 
   toggleDarkMode() {
     this.layoutService.layoutConfig.update((state) => ({ ...state, darkTheme: !state.darkTheme }));
+  }
+
+  logout() {
+    this.store.dispatch(logout());
   }
 }
