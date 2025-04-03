@@ -5,8 +5,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 @Component({
   selector: 'app-base-modal',
   imports: [],
-  templateUrl: './base-modal.component.html',
-  styleUrl: './base-modal.component.scss',
+  template: ``,
 })
 export abstract class BaseModalComponent implements OnInit {
   form!: FormGroup;
