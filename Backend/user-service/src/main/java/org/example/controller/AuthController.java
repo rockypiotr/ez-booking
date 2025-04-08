@@ -29,7 +29,8 @@ public class AuthController {
         String message = authService.register(
                 request.getUsername(),
                 request.getPassword(),
-                request.getEmail()
+                request.getEmail(),
+                request.getRole()
         );
         return ResponseEntity.ok(new RegisterResponse(message));
     }

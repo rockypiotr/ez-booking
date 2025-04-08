@@ -1,6 +1,7 @@
 package org.example.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.model.Role;
 import org.example.model.entity.User;
 import org.example.repository.UserRepository;
 import org.example.security.JwtTokenProvider;
@@ -25,7 +26,7 @@ public class AuthService {
         return tokenProvider.generateToken(user.getUsername());
     }
 
-    public String register(String username, String password, String email) {
+    public String register(String username, String password, String email, Role role) {
         System.out.println("rejestruj");
         if (userRepository.findByUsername(username).isPresent()) {
             throw new RuntimeException("User already exists");
@@ -39,6 +40,7 @@ public class AuthService {
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
         user.setEmail(email);
+        user.setRole(role);
         userRepository.save(user);
 
         return "User registered";

@@ -2,6 +2,7 @@ package org.example.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.example.model.Role;
 
 @Entity
 @Table(name = "users")
@@ -19,4 +20,7 @@ public class User {
 
     @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(nullable = false)
+    private Role role;
 }
