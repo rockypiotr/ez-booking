@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -56,7 +56,7 @@ import { LoginRequest } from '../../@shared/models/auth';
           ></button>
           <p>
             Don’t have an account?
-            <p-button variant="text" label="Sign up"></p-button>
+            <p-button variant="text" label="Sign up" (onClick)="onSignUp()"></p-button>
           </p>
         </form>
       </div>
@@ -67,6 +67,7 @@ export class Login implements OnInit {
   form!: FormGroup;
   private readonly fb = inject(FormBuilder);
   private readonly store = inject(Store<AppState>);
+  private readonly router = inject(Router);
 
   ngOnInit(): void {
     this.createForm();
@@ -75,6 +76,10 @@ export class Login implements OnInit {
   onLogin(): void {
     this.validateForm();
     this.login();
+  }
+
+  onSignUp() {
+    this.router.navigate(['/auth/register']);
   }
 
   private createForm(): void {
