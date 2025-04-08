@@ -6,16 +6,12 @@ import { environment } from '../../../environments/environment';
 import { AppState } from '../../@core/store/app.state';
 import { logout } from '../../@core/store/auth/auth.action';
 import { selectIsAuthenticated } from '../../@core/store/auth/auth.selectors';
-import { LoginRequest, LoginResponse } from '../../@shared/models/auth';
-
-interface ILoginData {
-  username: string;
-  password: string;
-}
-
-interface Token {
-  token: string;
-}
+import {
+  LoginRequest,
+  LoginResponse,
+  RegisterRequest,
+  RegisterResponse,
+} from '../../@shared/models/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -35,5 +31,9 @@ export class AuthService {
 
   logout(): void {
     this.store.dispatch(logout());
+  }
+
+  register(payload: RegisterRequest): Observable<RegisterResponse> {
+    return this.http.post<RegisterResponse>(`${this.apiUrl}/auth/register`, payload);
   }
 }
