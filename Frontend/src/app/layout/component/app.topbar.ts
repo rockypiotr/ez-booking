@@ -1,11 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { MenuItem } from 'primeng/api';
 import { StyleClassModule } from 'primeng/styleclass';
-import { AppState } from '../../@core/store/app.state';
-import { logout } from '../../@core/store/auth/auth.action';
+import { AuthService } from '../../pages/service/auth.service';
 import { LayoutService } from '../service/layout.service';
 
 @Component({
@@ -105,13 +103,13 @@ import { LayoutService } from '../service/layout.service';
 export class AppTopbar {
   items!: MenuItem[];
   public readonly layoutService = inject(LayoutService);
-  private readonly store = inject(Store<AppState>);
+  private readonly authService = inject(AuthService);
 
   toggleDarkMode() {
     this.layoutService.layoutConfig.update((state) => ({ ...state, darkTheme: !state.darkTheme }));
   }
 
   logout() {
-    this.store.dispatch(logout());
+    this.authService.logout();
   }
 }
