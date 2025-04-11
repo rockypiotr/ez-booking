@@ -90,8 +90,8 @@ export class Login implements OnInit {
 
   private createForm(): void {
     this.form = this.fb.group({
-      username: ['test', Validators.required],
-      password: ['test', Validators.required],
+      username: ['adminp', Validators.required],
+      password: ['adminp', Validators.required],
     });
   }
 
