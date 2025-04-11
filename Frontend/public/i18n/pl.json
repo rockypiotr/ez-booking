@@ -1,0 +1,21 @@
+{
+  "auth": {
+    "signIn": "Logowanie",
+    "signUp": "Rejestracja",
+    "username": "Użytkownik",
+    "password": "Hasło",
+    "getStarted": "Zaloguj",
+    "email": "email",
+    "role": "Rola",
+    "dontHaveAccount": "Nie masz konta?",
+    "register": "Zarejestruj konto",
+    "alreadyHaveAccount": "Masz już konto?",
+    "login": "Zaloguj się"
+  },
+  "enum": {
+    "userRole": {
+      "CLIENT": "Klient",
+      "PROVIDER": "Użytkownik biznesowy"
+    }
+  }
+}
