@@ -1,10 +1,12 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withHashLocation, withInMemoryScrolling } from '@angular/router';
 
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideEffects } from '@ngrx/effects';
 import { ActionReducer, MetaReducer, provideStore } from '@ngrx/store';
+import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { providePrimeNG } from 'primeng/config';
 import { authInterceptor } from './@core/http/auth.interceptor';
@@ -19,9 +21,19 @@ export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionRedu
 
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
 
+const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>
+  new TranslateHttpLoader(http, './i18n/', '.json');
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
+    provideTranslateService({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     provideRouter(
       routes,
       withHashLocation(),
