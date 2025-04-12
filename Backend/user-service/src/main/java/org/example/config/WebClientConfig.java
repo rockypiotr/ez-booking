@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class WebClientConfig {
     @Bean
-    public WebClient providerServiceClient(@Value("${provider.service.url:http://localhost:8082}") String baseUrl) {
+    public WebClient businessServiceClient(@Value("${business.service.url:http://localhost:8082}") String baseUrl) {
         return WebClient.builder()
                 .baseUrl(baseUrl)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)

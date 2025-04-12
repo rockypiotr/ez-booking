@@ -20,6 +20,5 @@ public class RegisterRequest {
     private Role role;
     private String companyName;
     private String websiteUrl;
-    private String createdAt;
     private List<String> services;
 }

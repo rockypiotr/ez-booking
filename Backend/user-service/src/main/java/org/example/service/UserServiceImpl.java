@@ -131,6 +131,14 @@ public class UserServiceImpl implements UserService {
             validationErrors.add("Password must be at least 8 characters long");
         }
 
+        if (ValidationUtils.isNullOrBlank(request.getPhone())) {
+            validationErrors.add("Phone number cannot be empty");
+        }
+
+        if (ValidationUtils.isNullOrBlank(String.valueOf(request.getRole()))) {
+            validationErrors.add("Role cannot be empty");
+        }
+
         if (!validationErrors.isEmpty()) {
             throw new ValidationException("Registration validation failed", validationErrors);
         }

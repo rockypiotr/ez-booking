@@ -1,4 +1,4 @@
-package org.example.config;
+package org.example.businessservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +15,7 @@ public class CorsConfig {
       public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:4200")
+                .allowedOrigins("http://localhost:8201")
                 .allowedMethods("*")
                 .allowedHeaders("*")
                 .allowCredentials(true);

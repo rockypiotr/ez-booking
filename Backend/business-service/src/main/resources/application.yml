@@ -6,7 +6,7 @@ spring:
     name: provider-service
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/providerdb
+    url: jdbc:postgresql://localhost:5432/businessdb
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
 

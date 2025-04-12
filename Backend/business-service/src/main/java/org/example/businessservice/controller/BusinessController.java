@@ -18,7 +18,7 @@ public class BusinessController {
     private final BusinessService businessService;
 
     @PostMapping("/register")
-    public ResponseEntity<RegisterResponse> registerProvider(@RequestBody RegisterRequest request) {
+    public ResponseEntity<RegisterResponse> addBusiness(@RequestBody RegisterRequest request) {
         RegisterResponse response = businessService.addBusiness(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
