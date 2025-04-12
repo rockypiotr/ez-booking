@@ -3,19 +3,18 @@ package org.example.service;
 import io.micrometer.common.util.StringUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.example.dto.LoginRequest;
-import org.example.dto.LoginResponse;
-import org.example.dto.RegisterRequest;
-import org.example.dto.RegisterResponse;
+import org.example.dto.*;
 import org.example.entity.User;
 import org.example.exception.*;
+import org.example.model.Role;
 import org.example.repository.UserRepository;
 import org.example.security.JwtTokenProvider;
 import org.example.util.ValidationUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +26,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider tokenProvider;
+    private final WebClient businessServiceClient;
 
     public LoginResponse login(LoginRequest request) {
         validateLoginRequest(request);
@@ -71,11 +71,41 @@ public class UserServiceImpl implements UserService {
             User savedUser = userRepository.save(user);
             logger.info("Created new user: {}", user);
 
+            if (Role.BUSINESS.equals(user.getRole())) {
+                BusinessDTO businessDTO = createBusinessDTOFromUser(savedUser, request);
+                callBusinessServiceToAddBusiness(businessDTO);
+            }
+
             return buildRegisterResponse(savedUser);
         } catch (Exception e) {
             logger.error("Failed to register user: {}", e.getMessage());
             throw new RegistrationException("Failed to complete registration", e);
         }
+    }
+
+    private void callBusinessServiceToAddBusiness(BusinessDTO businessDTO) {
+        try {
+            businessServiceClient.post()
+                    .uri("/business/register")
+                    .bodyValue(businessDTO)
+                    .retrieve()
+                    .bodyToMono(Void.class)
+                    .block();
+            logger.info("Successfully created business : {}", businessDTO.getName());
+        } catch (WebClientResponseException e) {
+            logger.error("Failed to create business in business-service: {}", e.getResponseBodyAsString(), e);
+            throw new RegistrationException("Failed to create business in business-service: " + e.getMessage(), e.getCause());
+        }
+    }
+
+    private BusinessDTO createBusinessDTOFromUser(User savedUser, RegisterRequest request) {
+        return BusinessDTO.builder()
+                .ownerId(savedUser.getId())
+                .name(request.getCompanyName())
+                .websiteUrl(request.getWebsiteUrl())
+                .services(request.getServices())
+                .active(true)
+                .build();
     }
 
     private void validateRegistrationRequest(RegisterRequest request) {
@@ -113,7 +143,6 @@ public class UserServiceImpl implements UserService {
                 .email(request.getEmail())
                 .role(request.getRole())
                 .phoneNumber(request.getPhone())
-                .createdAt(LocalDateTime.now())
                 .build();
     }
 

@@ -16,4 +16,4 @@ spring:
         - id: provider-service
           uri: http://localhost:8082
           predicates:
-            - Path=/provider/**
+            - Path=/business/**
