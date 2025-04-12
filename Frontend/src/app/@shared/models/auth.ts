@@ -20,5 +20,5 @@ export interface RegisterResponse {
 
 export enum UserRole {
   CLIENT = 'CLIENT',
-  PROVIDER = 'PROVIDER',
+  BUSINESS = 'BUSINESS',
 }
