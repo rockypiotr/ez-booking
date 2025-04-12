@@ -1,16 +1,34 @@
 {
+  "button": {
+    "login": "Zaloguj się",
+    "register": "Zarejestruj się",
+    "moveOn": "Przejdź dalej",
+    "back": "Powrót"
+  },
   "auth": {
-    "signIn": "Logowanie",
-    "signUp": "Rejestracja",
-    "username": "Użytkownik",
-    "password": "Hasło",
-    "getStarted": "Zaloguj",
-    "email": "email",
-    "role": "Rola",
-    "dontHaveAccount": "Nie masz konta?",
-    "register": "Zarejestruj konto",
-    "alreadyHaveAccount": "Masz już konto?",
-    "login": "Zaloguj się"
+    "link": {
+      "dontHaveAccount": "Nie masz konta?",
+      "alreadyHaveAccount": "Masz już konto?",
+      "login": "Zaloguj się"
+    },
+    "form": {
+      "label": {
+        "signIn": "Logowanie",
+        "signUp": "Rejestracja",
+        "username": "Użytkownik",
+        "password": "Hasło",
+        "email": "Email",
+        "phoneNumber": "Numer telefonu",
+        "companyName": "Nazwa firmy",
+        "websiteUrl": "Adres strony internetowej",
+        "services": "Oferowane usługi"
+      }
+    },
+    "header": {
+      "userData": "Dane użytkownika",
+      "businessData": "Dane firmy",
+      "services": "Usługi"
+    }
   },
   "enum": {
     "userRole": {

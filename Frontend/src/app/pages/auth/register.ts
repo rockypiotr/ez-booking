@@ -1,20 +1,18 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, DestroyRef, inject, OnInit, WritableSignal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { AutoFocus } from 'primeng/autofocus';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
-import { DropdownModule } from 'primeng/dropdown';
+import { InputMask } from 'primeng/inputmask';
 import { InputTextModule } from 'primeng/inputtext';
+import { MultiSelect } from 'primeng/multiselect';
 import { PasswordModule } from 'primeng/password';
 import { RippleModule } from 'primeng/ripple';
+import { Step, StepList, StepPanel, StepPanels, Stepper } from 'primeng/stepper';
 import { tap } from 'rxjs';
 import { RegisterRequest, UserRole } from '../../@shared/models/auth';
 import { AuthService } from '../service/auth.service';
@@ -31,69 +29,23 @@ import { AuthService } from '../service/auth.service';
     RouterModule,
     RippleModule,
     ReactiveFormsModule,
-    DropdownModule,
     TranslatePipe,
+    AutoFocus,
+    CommonModule,
+    Stepper,
+    StepList,
+    Step,
+    StepPanels,
+    StepPanel,
+    InputMask,
+    MultiSelect,
   ],
-  template: `
-    <div class="flex items-center justify-center min-h-screen bg-gray-100">
-      <div class="w-full min-w-sm max-w-md m-4 p-8 space-y-6 bg-white rounded-2xl shadow-lg">
-        <form (ngSubmit)="onRegister()" [formGroup]="form" class="space-y-8 max-w-sm">
-          <h3>{{ 'auth.signUp' | translate }}</h3>
-          <fieldset class="space-y-8">
-            <div class="flex flex-col">
-              <label class="mb-2" for="username">{{ 'auth.username' | translate }}</label>
-              <input formControlName="username" id="username" pInputText />
-            </div>
-
-            <div class="flex flex-col">
-              <label class="mb-2" for="password">{{ 'auth.password' | translate }}</label>
-              <input formControlName="password" id="password" pInputText type="password" />
-            </div>
-
-            <div class="flex flex-col">
-              <label class="mb-2" for="email">{{ 'auth.email' | translate }}</label>
-              <input [email]="true" formControlName="email" id="email" pInputText />
-            </div>
-
-            <div class="flex flex-col">
-              <label class="mb-2" for="role">{{ 'auth.role' | translate }}</label>
-              <p-dropdown [options]="userRoles" formControlName="role">
-                <ng-template let-option pTemplate="item">
-                  {{ 'enum.userRole.' + option | translate }}
-                </ng-template>
-                <ng-template let-option pTemplate="selectedItem">
-                  {{ 'enum.userRole.' + option | translate }}
-                </ng-template>
-              </p-dropdown>
-            </div>
-          </fieldset>
-
-          <button
-            [raised]="true"
-            [rounded]="true"
-            class="w-full"
-            [label]="'auth.register' | translate"
-            pButton
-            pRipple
-            type="submit"
-          ></button>
-          <p>
-            {{ 'auth.alreadyHaveAccount' | translate }}
-            <p-button
-              [label]="'auth.login' | translate"
-              variant="text"
-              (onClick)="onSignIn()"
-            ></p-button>
-          </p>
-        </form>
-      </div>
-    </div>
-  `,
+  templateUrl: './register.html',
 })
 export class Register implements OnInit {
   form!: FormGroup;
-  userRoles: UserRole[] = Object.values(UserRole);
-  private readonly fb = inject(FormBuilder);
+  activeStep: number | WritableSignal<number> = 1;
+  protected servicesList = ['Beauty salon'];
   private readonly authService = inject(AuthService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly router = inject(Router);
@@ -112,12 +64,7 @@ export class Register implements OnInit {
   }
 
   private createForm(): void {
-    this.form = this.fb.group({
-      username: [null, Validators.required],
-      password: [null, Validators.required],
-      email: [null, Validators.email],
-      role: [null, Validators.required],
-    });
+    this.form = this.authService.createRegisterForm();
   }
 
   private validateForm(): void {
@@ -137,6 +84,13 @@ export class Register implements OnInit {
   }
 
   private getPayload(): RegisterRequest {
-    return this.form.getRawValue();
+    const { userData, businessData, servicesData } = this.form.getRawValue();
+
+    return {
+      ...userData,
+      ...businessData,
+      ...servicesData,
+      role: UserRole.BUSINESS,
+    };
   }
 }

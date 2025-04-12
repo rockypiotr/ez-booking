@@ -1,49 +1,213 @@
 <div class="flex items-center justify-center min-h-screen bg-gray-100">
   <div class="w-full min-w-sm max-w-md m-4 p-8 space-y-6 bg-white rounded-2xl shadow-lg">
     <form (ngSubmit)="onRegister()" [formGroup]="form" class="space-y-8 max-w-sm">
-      <h3>{{ 'auth.signUp' | translate }}</h3>
-      <fieldset class="space-y-8">
-        <div class="flex flex-col">
-          <label class="mb-2" for="username">{{ 'auth.username' | translate }}</label>
-          <input formControlName="username" id="username" pInputText />
-        </div>
-
-        <div class="flex flex-col">
-          <label class="mb-2" for="password">{{ 'auth.password' | translate }}</label>
-          <input formControlName="password" id="password" pInputText type="password" />
-        </div>
-
-        <div class="flex flex-col">
-          <label class="mb-2" for="email">{{ 'auth.email' | translate }}</label>
-          <input [email]="true" formControlName="email" id="email" pInputText />
-        </div>
-
-        <div class="flex flex-col">
-          <label class="mb-2" for="role">{{ 'auth.role' | translate }}</label>
-          <p-select [options]="userRoles" formControlName="role">
-            <ng-template let-option pTemplate="item">
-              {{ 'enum.userRole.' + option | translate }}
+      <h3>{{ 'auth.form.label.signUp' | translate }}</h3>
+      <p-stepper [(value)]="activeStep" class="basis-[40rem]">
+        <p-step-list>
+          <p-step [value]="1" class="flex flex-row flex-auto gap-2">
+            <ng-template #content let-activateCallback="activateCallback" let-value="value">
+              <button
+                (click)="activateCallback()"
+                class="bg-transparent border-0 inline-flex flex-col gap-2"
+                type="button"
+              >
+                <span
+                  [ngClass]="{
+                    'bg-primary text-primary-contrast border-primary': value <= activeStep,
+                    'border-surface': value > activeStep,
+                  }"
+                  class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
+                >
+                  <i class="pi pi-user"></i>
+                </span>
+              </button>
             </ng-template>
-            <ng-template let-option pTemplate="selectedItem">
-              {{ 'enum.userRole.' + option | translate }}
-            </ng-template>
-          </p-select>
-        </div>
-      </fieldset>
+            3
+          </p-step>
 
-      <button
-        [label]="'auth.register' | translate"
-        [raised]="true"
-        class="w-full"
-        pButton
-        pRipple
-        type="submit"
-      ></button>
+          <p-step [value]="2" class="flex flex-row flex-auto gap-2">
+            <ng-template #content let-activateCallback="activateCallback" let-value="value">
+              <button
+                (click)="activateCallback()"
+                class="bg-transparent border-0 inline-flex flex-col gap-2"
+                type="button"
+              >
+                <span
+                  [ngClass]="{
+                    'bg-primary text-primary-contrast border-primary': value <= activeStep,
+                    'border-surface': value > activeStep,
+                  }"
+                  class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
+                >
+                  <i class="pi pi-id-card"></i>
+                </span>
+              </button>
+            </ng-template>
+          </p-step>
+
+          <p-step [value]="3" class="flex flex-row flex-auto gap-2">
+            <ng-template #content let-activateCallback="activateCallback" let-value="value">
+              <button
+                (click)="activateCallback()"
+                class="bg-transparent border-0 inline-flex flex-col gap-2"
+                type="button"
+              >
+                <span
+                  [ngClass]="{
+                    'bg-primary text-primary-contrast border-primary': value <= activeStep,
+                    'border-surface': value > activeStep,
+                  }"
+                  class="rounded-full border-2 w-12 h-12 inline-flex items-center justify-center"
+                >
+                  <i class="pi pi-id-card"></i>
+                </span>
+              </button>
+            </ng-template>
+          </p-step>
+        </p-step-list>
+
+        <p-step-panels>
+          <p-step-panel [value]="1">
+            <ng-template #content let-activateCallback="activateCallback">
+              <div class="flex flex-col gap-2 mx-auto">
+                <div class="text-center mt-4 mb-4 text-xl font-semibold">
+                  {{ 'auth.header.userData' | translate }}
+                </div>
+                <fieldset class="space-y-8" formGroupName="userData">
+                  <div class="flex flex-col">
+                    <label class="mb-2" for="username">{{
+                      'auth.form.label.username' | translate
+                    }}</label>
+                    <input
+                      [pAutoFocus]="true"
+                      formControlName="username"
+                      id="username"
+                      pInputText
+                    />
+                  </div>
+
+                  <div class="flex flex-col">
+                    <label class="mb-2" for="password">{{
+                      'auth.form.label.password' | translate
+                    }}</label>
+                    <input formControlName="password" id="password" pInputText type="password" />
+                  </div>
+
+                  <div class="flex flex-col">
+                    <label class="mb-2" for="email">{{
+                      'auth.form.label.email' | translate
+                    }}</label>
+                    <input [email]="true" formControlName="email" id="email" pInputText />
+                  </div>
+
+                  <div class="flex flex-col">
+                    <label class="mb-2" for="email">{{
+                      'auth.form.label.phoneNumber' | translate
+                    }}</label>
+                    <p-inputmask
+                      formControlName="phoneNumber"
+                      mask="999-999-999"
+                      styleClass="w-full"
+                    ></p-inputmask>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="flex pt-6 justify-end">
+                <p-button
+                  (onClick)="activateCallback(2)"
+                  [disabled]="form.controls['userData'].invalid"
+                  [label]="'button.moveOn' | translate"
+                  icon="pi pi-arrow-right"
+                  iconPos="right"
+                />
+              </div>
+            </ng-template>
+          </p-step-panel>
+
+          <p-step-panel [value]="2">
+            <ng-template #content let-activateCallback="activateCallback">
+              <div class="flex flex-col gap-2 mx-auto" style="min-height: 16rem; max-width: 24rem">
+                <div class="text-center mt-4 mb-4 text-xl font-semibold">
+                  {{ 'auth.header.businessData' | translate }}
+                </div>
+                <fieldset class="space-y-8" formGroupName="businessData">
+                  <div class="flex flex-col">
+                    <label class="mb-2" for="companyName">{{
+                      'auth.form.label.companyName' | translate
+                    }}</label>
+                    <input
+                      [pAutoFocus]="true"
+                      formControlName="companyName"
+                      id="companyName"
+                      pInputText
+                    />
+                  </div>
+
+                  <div class="flex flex-col">
+                    <label class="mb-2" for="websiteUrl">{{
+                      'auth.form.label.websiteUrl' | translate
+                    }}</label>
+                    <input formControlName="websiteUrl" id="websiteUrl" pInputText />
+                  </div>
+                </fieldset>
+              </div>
+              <div class="flex pt-6 justify-between">
+                <p-button
+                  (onClick)="activateCallback(1)"
+                  [label]="'button.back' | translate"
+                  icon="pi pi-arrow-left"
+                  severity="secondary"
+                />
+                <p-button
+                  (onClick)="activateCallback(3)"
+                  [disabled]="form.controls['businessData'].invalid"
+                  [label]="'button.moveOn' | translate"
+                  icon="pi pi-arrow-right"
+                  iconPos="right"
+                />
+              </div>
+            </ng-template>
+          </p-step-panel>
+
+          <p-step-panel [value]="3">
+            <ng-template #content let-activateCallback="activateCallback">
+              <div class="flex flex-col gap-2 mx-auto" style="min-height: 16rem; max-width: 24rem">
+                <div class="text-center mt-4 mb-4 text-xl font-semibold">
+                  {{ 'auth.header.services' | translate }}
+                </div>
+                <fieldset class="space-y-8" formGroupName="servicesData">
+                  <div class="flex flex-col">
+                    <label for="services">{{ 'auth.form.label.services' | translate }}</label>
+                    <p-multiSelect
+                      [options]="servicesList"
+                      [pAutoFocus]="true"
+                      formControlName="services"
+                    ></p-multiSelect>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="flex pt-6 justify-between">
+                <p-button
+                  (onClick)="activateCallback(2)"
+                  [label]="'button.back' | translate"
+                  icon="pi pi-arrow-left"
+                  severity="secondary"
+                />
+                <p-button
+                  [disabled]="form.controls['servicesData'].invalid"
+                  [label]="'button.register' | translate"
+                  type="submit"
+                />
+              </div>
+            </ng-template>
+          </p-step-panel>
+        </p-step-panels>
+      </p-stepper>
       <p>
-        {{ 'auth.alreadyHaveAccount' | translate }}
+        {{ 'auth.link.alreadyHaveAccount' | translate }}
         <p-button
           (onClick)="onSignIn()"
-          [label]="'auth.login' | translate"
+          [label]="'button.login' | translate"
           variant="text"
         ></p-button>
       </p>

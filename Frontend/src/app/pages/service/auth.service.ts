@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -20,6 +21,7 @@ export class AuthService {
   private readonly apiUrl = environment.apiUrl;
   private readonly http = inject(HttpClient);
   private readonly store = inject(Store<AppState>);
+  private readonly fb = inject(FormBuilder);
 
   get isAuthenticated$(): Observable<boolean> {
     return this.store.select(selectIsAuthenticated);
@@ -35,5 +37,23 @@ export class AuthService {
 
   register(payload: RegisterRequest): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${this.apiUrl}/auth/register`, payload);
+  }
+
+  createRegisterForm(): FormGroup {
+    return this.fb.group({
+      userData: this.fb.group({
+        username: [null, [Validators.required]],
+        password: [null, [Validators.required]],
+        email: [null, [Validators.email]],
+        phoneNumber: [null, [Validators.required]],
+      }),
+      businessData: this.fb.group({
+        companyName: [null, [Validators.required]],
+        websiteUrl: [null, []],
+      }),
+      servicesData: this.fb.group({
+        services: [[], [Validators.required]],
+      }),
+    });
   }
 }
