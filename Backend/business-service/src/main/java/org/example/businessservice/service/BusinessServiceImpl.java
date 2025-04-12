@@ -15,8 +15,6 @@ import java.time.LocalDateTime;
 @Service
 @RequiredArgsConstructor
 public class BusinessServiceImpl implements BusinessService {
-    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(BusinessServiceImpl.class);
-
     private final BusinessRepository businessRepository;
 
     @Transactional
@@ -25,19 +23,19 @@ public class BusinessServiceImpl implements BusinessService {
 
         Business business = createBusinessFromRequest(request);
         Business savedBusiness = businessRepository.save(business);
-        logger.info("Created new business: {}", savedBusiness.getName());
+        log.info("Created new business: {}", savedBusiness.getName());
 
         return buildRegisterBusinessResponse(savedBusiness);
     }
 
     public void validateAddBusinessRequest(RegisterRequest request) {
         if (request.getServices() == null || request.getServices().isEmpty()) {
-            logger.error("At least one service must be provided.");
+            log.error("At least one service must be provided.");
             throw new IllegalArgumentException("At least one service must be provided.");
         }
 
         if (request.getName() == null || request.getName().isEmpty()) {
-            logger.error("Company name cannot be empty.");
+            log.error("Company name cannot be empty.");
             throw new IllegalArgumentException("Company name cannot be empty.");
         }
     }

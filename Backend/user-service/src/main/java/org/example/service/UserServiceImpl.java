@@ -3,6 +3,7 @@ package org.example.service;
 import io.micrometer.common.util.StringUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.connector.Response;
 import org.example.dto.*;
 import org.example.entity.User;
 import org.example.exception.*;
@@ -69,7 +70,7 @@ public class UserServiceImpl implements UserService {
             User user = createUserFromRequest(request);
             user.setPassword(passwordEncoder.encode(request.getPassword()));
             User savedUser = userRepository.save(user);
-            logger.info("Created new user: {}", user);
+            logger.info("Created new user: {}", user.getUsername());
 
             if (Role.BUSINESS.equals(user.getRole())) {
                 BusinessDTO businessDTO = createBusinessDTOFromUser(savedUser, request);
@@ -89,7 +90,7 @@ public class UserServiceImpl implements UserService {
                     .uri("/business/register")
                     .bodyValue(businessDTO)
                     .retrieve()
-                    .bodyToMono(Void.class)
+                    .bodyToMono(Response.class)
                     .block();
             logger.info("Successfully created business : {}", businessDTO.getName());
         } catch (WebClientResponseException e) {
