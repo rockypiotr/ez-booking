@@ -15,7 +15,7 @@
   "enum": {
     "userRole": {
       "CLIENT": "Klient",
-      "PROVIDER": "Użytkownik biznesowy"
+      "BUSINESS": "Użytkownik biznesowy"
     }
   }
 }
