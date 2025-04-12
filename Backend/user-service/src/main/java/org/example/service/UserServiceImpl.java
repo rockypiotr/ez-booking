@@ -132,7 +132,7 @@ public class UserServiceImpl implements UserService {
             validationErrors.add("Password must be at least 8 characters long");
         }
 
-        if (ValidationUtils.isNullOrBlank(request.getPhone())) {
+        if (ValidationUtils.isNullOrBlank(request.getPhoneNumber())) {
             validationErrors.add("Phone number cannot be empty");
         }
 
@@ -151,7 +151,7 @@ public class UserServiceImpl implements UserService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .email(request.getEmail())
                 .role(request.getRole())
-                .phoneNumber(request.getPhone())
+                .phoneNumber(request.getPhoneNumber())
                 .build();
     }
 
