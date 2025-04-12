@@ -1,0 +1,52 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="w-full min-w-sm max-w-md m-4 p-8 space-y-6 bg-white rounded-2xl shadow-lg">
+    <form (ngSubmit)="onRegister()" [formGroup]="form" class="space-y-8 max-w-sm">
+      <h3>{{ 'auth.signUp' | translate }}</h3>
+      <fieldset class="space-y-8">
+        <div class="flex flex-col">
+          <label class="mb-2" for="username">{{ 'auth.username' | translate }}</label>
+          <input formControlName="username" id="username" pInputText />
+        </div>
+
+        <div class="flex flex-col">
+          <label class="mb-2" for="password">{{ 'auth.password' | translate }}</label>
+          <input formControlName="password" id="password" pInputText type="password" />
+        </div>
+
+        <div class="flex flex-col">
+          <label class="mb-2" for="email">{{ 'auth.email' | translate }}</label>
+          <input [email]="true" formControlName="email" id="email" pInputText />
+        </div>
+
+        <div class="flex flex-col">
+          <label class="mb-2" for="role">{{ 'auth.role' | translate }}</label>
+          <p-select [options]="userRoles" formControlName="role">
+            <ng-template let-option pTemplate="item">
+              {{ 'enum.userRole.' + option | translate }}
+            </ng-template>
+            <ng-template let-option pTemplate="selectedItem">
+              {{ 'enum.userRole.' + option | translate }}
+            </ng-template>
+          </p-select>
+        </div>
+      </fieldset>
+
+      <button
+        [label]="'auth.register' | translate"
+        [raised]="true"
+        class="w-full"
+        pButton
+        pRipple
+        type="submit"
+      ></button>
+      <p>
+        {{ 'auth.alreadyHaveAccount' | translate }}
+        <p-button
+          (onClick)="onSignIn()"
+          [label]="'auth.login' | translate"
+          variant="text"
+        ></p-button>
+      </p>
+    </form>
+  </div>
+</div>

@@ -49,7 +49,6 @@ import { LoginRequest } from '../../@shared/models/auth';
           </fieldset>
           <button
             pButton
-            [rounded]="true"
             pRipple
             [raised]="true"
             class="w-full"
