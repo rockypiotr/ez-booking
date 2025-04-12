@@ -12,3 +12,8 @@ spring:
           uri: http://localhost:8081
           predicates:
             - Path=/auth/**
+
+        - id: provider-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/provider/**
