@@ -1,0 +1,134 @@
+.calendar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.view-toggle .p-button.active {
+  background: #e0e0e0;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calendar-grid.day-view {
+  display: flex;
+  grid-template-columns: none;
+}
+
+.calendar-grid.week-view {
+  display: flex;
+  grid-template-columns: none;
+}
+
+.day-name {
+  height: 40px;
+  text-align: center;
+  padding: 0.5rem;
+  font-weight: bold;
+}
+
+.day-cell {
+  min-height: 100px;
+  padding: 0.5rem;
+  border: 1px solid #eee;
+  cursor: pointer;
+}
+
+.day-number {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.appointment {
+  background: #f0f0f0;
+  padding: 0.25rem;
+  margin: 0.25rem 0;
+  border-radius: 3px;
+  font-size: 0.9rem;
+}
+
+.inactive {
+  background: #fafafa;
+  color: #999;
+  cursor: default;
+}
+
+.employee-selector {
+  min-width: 200px;
+}
+
+.time-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.time-header {
+  height: 40px;
+}
+
+.time-slot {
+  height: 60px;
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+
+.day-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.time-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.time-cell {
+  height: 60px;
+  border-bottom: 1px solid #eee;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.time-cell:hover {
+  background: #f5f5f5;
+}
+
+.current-time-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: red;
+  z-index: 10;
+}
