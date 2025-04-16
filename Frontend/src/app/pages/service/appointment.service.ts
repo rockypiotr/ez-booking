@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import {
-  AvailableAppointmentsRequest,
-  AvailableAppointmentsResponse,
   CreateAppointmentRequest,
   CreateAppointmentResponse,
 } from '../../@shared/models/appointment';
@@ -16,6 +15,18 @@ import { EmployeeSelectorOption } from '../../@shared/models/employee-selector';
 export class AppointmentService {
   private readonly apiUrl = environment.apiUrl;
   private readonly http = inject(HttpClient);
+  private readonly fb = inject(FormBuilder);
+
+  createForm() {
+    return this.fb.group({
+      client_id: [null, [Validators.required]],
+      service_id: [null, [Validators.required]],
+      employee_id: [null, [Validators.required]],
+      service_date: [null, [Validators.required]],
+      service_time: [null, [Validators.required]],
+      notes: [null, []],
+    });
+  }
 
   createAppointment(
     appointmentData: CreateAppointmentRequest
@@ -54,9 +65,7 @@ export class AppointmentService {
     });
   }
 
-  getAvailableVisits(
-    appointmentData: AvailableAppointmentsRequest
-  ): Observable<AvailableAppointmentsResponse> {
+  getAvailableVisits(): Observable<string[]> {
     // return this.http.post<AvailableAppointmentsResponse>(
     //   `${this.apiUrl}/appointment/available-visits`,
     //   appointmentData

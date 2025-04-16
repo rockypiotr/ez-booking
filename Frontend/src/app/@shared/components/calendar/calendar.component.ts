@@ -1,9 +1,10 @@
+import { style } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, computed, EventEmitter, inject, Input, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Button } from 'primeng/button';
-import { MultiSelect } from 'primeng/multiselect';
+import { Select } from 'primeng/select';
 import { CalendarEvent } from './models/calendar-event';
 import { CalendarResource } from './models/calendar-resource';
 import { CalendarSlot } from './models/calendar-slot';
@@ -11,13 +12,13 @@ import { CalendarSlot } from './models/calendar-slot';
 type ViewMode = 'day' | 'week' | 'month';
 
 @Component({
-  selector: 'app-appointment-calendar',
-  imports: [CommonModule, Button, FormsModule, MultiSelect],
-  templateUrl: './appointment-calendar.component.html',
+  selector: 'app-calendar',
+  imports: [CommonModule, Button, FormsModule, Select],
+  templateUrl: './calendar.component.html',
   standalone: true,
-  styleUrl: './appointment-calendar.component.scss',
+  styleUrl: './calendar.component.scss',
 })
-export class AppointmentCalendarComponent {
+export class CalendarComponent {
   @Input() resources: CalendarResource[] = [];
   @Input() events: CalendarEvent[] = [];
   @Input() workingHours: string[] = Array.from({ length: 12 }, (_, i) => `${i + 8}:00`);
@@ -27,7 +28,7 @@ export class AppointmentCalendarComponent {
 
   currentDate = signal(this.initialDate);
   selectedResource = signal<string | null>(null);
-  viewMode = signal<ViewMode>('month');
+  viewMode = signal<ViewMode>('day');
   currentYear = computed(() => this.currentDate().getFullYear());
 
   currentTimePosition = computed(() => {
@@ -54,10 +55,9 @@ export class AppointmentCalendarComponent {
         return this.getMonthView(date);
     }
   });
-
+  protected readonly style = style;
   private readonly translateService = inject(TranslateService);
   private readonly locale: string = this.translateService.currentLang;
-
   weekdays = computed(() => {
     if (this.customWeekdays) {
       return this.customWeekdays;
@@ -66,7 +66,6 @@ export class AppointmentCalendarComponent {
       new Intl.DateTimeFormat(this.locale, { weekday: 'short' }).format(new Date(2023, 0, 2 + i))
     );
   });
-
   currentMonthName = computed(() =>
     this.currentDate().toLocaleString(this.locale, { month: 'long' })
   );

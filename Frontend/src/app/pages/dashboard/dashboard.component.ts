@@ -4,6 +4,7 @@ import { AppointmentCalendarComponent } from '../../@shared/components/appointme
 @Component({
   selector: 'app-dashboard',
   imports: [AppointmentCalendarComponent],
+  providers: [],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })

@@ -5,6 +5,14 @@
     "moveOn": "Przejdź dalej",
     "back": "Powrót"
   },
+  "appointment": {
+    "modal": {
+      "header": {
+        "new": "Dodaj nową wizytę",
+        "edit": "Edytuj wizytę"
+      }
+    }
+  },
   "auth": {
     "link": {
       "dontHaveAccount": "Nie masz konta?",

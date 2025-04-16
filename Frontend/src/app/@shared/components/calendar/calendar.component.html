@@ -1,0 +1,115 @@
+@let mode = viewMode();
+<div class="calendar-container">
+  <div class="calendar-header">
+    <p-select
+      [(ngModel)]="selectedResource"
+      [options]="resources"
+      class="resource-selector"
+      optionLabel="name"
+      optionValue="id"
+      placeholder="Wybierz pracowników"
+    ></p-select>
+
+    <div class="controls">
+      <div class="navigation">
+        <p-button
+          (click)="previousPeriod()"
+          icon="pi pi-chevron-left"
+          styleClass="p-button-text"
+        ></p-button>
+        <h2>
+          @switch (mode) {
+            @case ('month') {
+              {{ currentMonthName() }} {{ currentYear() }}
+            }
+            @case ('week') {
+              Tydzień {{ currentDate().getDate() }} {{ currentMonthName() }}
+            }
+            @case ('day') {
+              {{ currentDate().getDate() }} {{ currentMonthName() }}
+            }
+          }
+        </h2>
+        <p-button
+          (click)="nextPeriod()"
+          icon="pi pi-chevron-right"
+          styleClass="p-button-text"
+        ></p-button>
+      </div>
+      <div class="view-toggle">
+        <p-button
+          (click)="setViewMode('day')"
+          [class.active]="mode === 'day'"
+          label="Dzień"
+          styleClass="p-button-text"
+        ></p-button>
+        <p-button
+          (click)="setViewMode('week')"
+          [class.active]="mode === 'week'"
+          label="Tydzień"
+          styleClass="p-button-text"
+        ></p-button>
+        <p-button
+          (click)="setViewMode('month')"
+          [class.active]="mode === 'month'"
+          label="Miesiąc"
+          styleClass="p-button-text"
+        ></p-button>
+      </div>
+    </div>
+  </div>
+
+  <div
+    [ngClass]="{ 'day-view': mode === 'day', 'week-view': mode === 'week' }"
+    class="calendar-grid"
+  >
+    @if (mode === 'month') {
+      @for (day of weekdays(); track day) {
+        <div class="day-name">{{ day }}</div>
+      }
+      @for (day of daysInView(); track day.date) {
+        <div
+          (click)="day.isCurrentMonth && openSlotDialog(day.date)"
+          [class.inactive]="!day.isCurrentMonth"
+          class="day-cell"
+        >
+          <span class="day-number">{{ day.number }}</span>
+          <div *ngFor="let event of getEventsForDay(day.date)" class="event">
+            {{ event.time }} - {{ event.title }}
+          </div>
+        </div>
+      }
+    } @else {
+      <div class="time-column">
+        <div class="time-header"></div>
+        @for (hour of workingHours; track hour) {
+          <div class="time-slot">{{ hour }}</div>
+        }
+      </div>
+
+      @for (day of daysInView(); track day.date) {
+        <div class="day-column">
+          <div class="day-name">
+            {{ weekdays()[day.date.getDay() === 0 ? 6 : day.date.getDay() - 1] }} {{ day.number }}
+          </div>
+          <div class="time-wrapper">
+            <div
+              (click)="openSlotDialog(day.date, hour)"
+              *ngFor="let hour of workingHours"
+              class="time-cell"
+            >
+              <div *ngFor="let event of getEventsForDayAndHour(day.date, hour)" class="event">
+                {{ event.title }}
+              </div>
+            </div>
+            <div
+              *ngIf="shouldShowTimeLine(day.date)"
+              [style.top.px]="currentTimePosition()"
+              class="current-time-line"
+            ></div>
+          </div>
+        </div>
+      }
+    }
+  </div>
+</div>
