@@ -1,8 +1,8 @@
 package org.example.service;
 
-import io.micrometer.common.util.StringUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.connector.Response;
 import org.example.dto.*;
 import org.example.entity.User;
@@ -16,13 +16,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService {
-    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -34,20 +35,18 @@ public class UserServiceImpl implements UserService {
 
         User user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> {
-                    logger.warn("Login attempt with non-existent username: {}", request.getUsername());
+                    log.warn("Login attempt with non-existent username: {}", request.getUsername());
                     throw new InvalidCredentialsException("Invalid username or password");
                 });
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            logger.warn("Failed login attempt for username: {}", request.getUsername());
+            log.warn("Failed login attempt for username: {}", request.getUsername());
             throw new InvalidCredentialsException("Invalid username or password");
         }
 
-        userRepository.save(user);
-
         String token = tokenProvider.generateToken(user.getUsername());
 
-        return buildLoginResponse(token);
+        return createAuthenticationTokenResponse(token);
     }
 
     @Transactional
@@ -56,35 +55,35 @@ public class UserServiceImpl implements UserService {
 
         userRepository.findByUsername(request.getUsername())
                 .ifPresent(user -> {
-                    logger.warn("Registration attempt with existing username: {}", request.getUsername());
+                    log.warn("Registration attempt with existing username: {}", request.getUsername());
                     throw new UserAlreadyExistsException("User with username " + request.getUsername() + " already exists");
                 });
 
         userRepository.findByEmail(request.getEmail())
                 .ifPresent(user -> {
-                    logger.warn("Registration attempt with existing email: {}", request.getEmail());
+                    log.warn("Registration attempt with existing email: {}", request.getEmail());
                     throw new EmailAlreadyExistsException("User with email " + request.getEmail() + " already exists");
                 });
 
         try {
             User user = createUserFromRequest(request);
-            user.setPassword(passwordEncoder.encode(request.getPassword()));
+            // Password is already encoded in createUserFromRequest
             User savedUser = userRepository.save(user);
-            logger.info("Created new user: {}", user.getUsername());
+            log.info("Created new user: {}", user.getUsername());
 
             if (Role.BUSINESS.equals(user.getRole())) {
-                BusinessDTO businessDTO = createBusinessDTOFromUser(savedUser, request);
-                callBusinessServiceToAddBusiness(businessDTO);
+                BusinessDTO businessDTO = createBusinessRegistrationDTO(savedUser, request);
+                registerBusinessInExternalService(businessDTO);
             }
 
-            return buildRegisterResponse(savedUser);
+            return createUserRegistrationResponse(savedUser);
         } catch (Exception e) {
-            logger.error("Failed to register user: {}", e.getMessage());
+            log.error("Failed to register user: {}", e.getMessage());
             throw new RegistrationException("Failed to complete registration", e);
         }
     }
 
-    private void callBusinessServiceToAddBusiness(BusinessDTO businessDTO) {
+    private void registerBusinessInExternalService(BusinessDTO businessDTO) {
         try {
             businessServiceClient.post()
                     .uri("/business/register")
@@ -92,14 +91,14 @@ public class UserServiceImpl implements UserService {
                     .retrieve()
                     .bodyToMono(Response.class)
                     .block();
-            logger.info("Successfully created business : {}", businessDTO.getName());
+            log.info("Successfully created business: {}", businessDTO.getName());
         } catch (WebClientResponseException e) {
-            logger.error("Failed to create business in business-service: {}", e.getResponseBodyAsString(), e);
+            log.error("Failed to create business in business-service: {}", e.getResponseBodyAsString(), e);
             throw new RegistrationException("Failed to create business in business-service: " + e.getMessage(), e.getCause());
         }
     }
 
-    private BusinessDTO createBusinessDTOFromUser(User savedUser, RegisterRequest request) {
+    private BusinessDTO createBusinessRegistrationDTO(User savedUser, RegisterRequest request) {
         return BusinessDTO.builder()
                 .ownerId(savedUser.getId())
                 .name(request.getCompanyName())
@@ -116,9 +115,7 @@ public class UserServiceImpl implements UserService {
 
         List<String> validationErrors = new ArrayList<>();
 
-        if (ValidationUtils.isNullOrBlank(request.getUsername())) {
-            validationErrors.add("Username cannot be empty");
-        }
+        validateField(validationErrors, request.getUsername(), "Username");
 
         if (ValidationUtils.isNullOrBlank(request.getEmail())) {
             validationErrors.add("Email cannot be empty");
@@ -132,16 +129,20 @@ public class UserServiceImpl implements UserService {
             validationErrors.add("Password must be at least 8 characters long");
         }
 
-        if (ValidationUtils.isNullOrBlank(request.getPhoneNumber())) {
-            validationErrors.add("Phone number cannot be empty");
-        }
+        validateField(validationErrors, request.getPhoneNumber(), "Phone number");
 
-        if (ValidationUtils.isNullOrBlank(String.valueOf(request.getRole()))) {
+        if (request.getRole() == null) {
             validationErrors.add("Role cannot be empty");
         }
 
         if (!validationErrors.isEmpty()) {
             throw new ValidationException("Registration validation failed", validationErrors);
+        }
+    }
+
+    private void validateField(List<String> validationErrors, String fieldValue, String fieldName) {
+        if (ValidationUtils.isNullOrBlank(fieldValue)) {
+            validationErrors.add(fieldName + " cannot be empty");
         }
     }
 
@@ -152,16 +153,19 @@ public class UserServiceImpl implements UserService {
                 .email(request.getEmail())
                 .role(request.getRole())
                 .phoneNumber(request.getPhoneNumber())
+                .companyName(request.getCompanyName())
+                .websiteUrl(request.getWebsiteUrl())
+                .createdAt(LocalDateTime.now())
                 .build();
     }
 
-    private RegisterResponse buildRegisterResponse(User savedUser) {
+    private RegisterResponse createUserRegistrationResponse(User savedUser) {
         return RegisterResponse.builder()
                 .id(savedUser.getId())
                 .username(savedUser.getUsername())
                 .email(savedUser.getEmail())
                 .role(savedUser.getRole())
-                .phone(savedUser.getPhoneNumber())
+                .phone(savedUser.getPhoneNumber()) // Using 'phone' to match RegisterResponse field name
                 .createdAt(savedUser.getCreatedAt())
                 .build();
     }
@@ -173,20 +177,15 @@ public class UserServiceImpl implements UserService {
 
         List<String> validationErrors = new ArrayList<>();
 
-        if (StringUtils.isBlank(request.getUsername())) {
-            validationErrors.add("Username cannot be empty");
-        }
-
-        if (StringUtils.isBlank(request.getPassword())) {
-            validationErrors.add("Password cannot be empty");
-        }
+        validateField(validationErrors, request.getUsername(), "Username");
+        validateField(validationErrors, request.getPassword(), "Password");
 
         if (!validationErrors.isEmpty()) {
             throw new ValidationException("Login validation failed", validationErrors);
         }
     }
 
-    private LoginResponse buildLoginResponse(String token) {
+    private LoginResponse createAuthenticationTokenResponse(String token) {
         return LoginResponse.builder()
                 .token(token)
                 .build();
