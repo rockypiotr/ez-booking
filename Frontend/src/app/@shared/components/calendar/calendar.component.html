@@ -1,14 +1,15 @@
 @let mode = viewMode();
+<pre>{{ events | json }}</pre>
 <div class="calendar-container">
   <div class="calendar-header">
-    <p-select
+    <p-multiSelect
       [(ngModel)]="selectedResource"
       [options]="resources"
       class="resource-selector"
       optionLabel="name"
       optionValue="id"
       placeholder="Wybierz pracowników"
-    ></p-select>
+    ></p-multiSelect>
 
     <div class="controls">
       <div class="navigation">
@@ -73,10 +74,11 @@
           [class.inactive]="!day.isCurrentMonth"
           class="day-cell"
         >
+          day-number
           <span class="day-number">{{ day.number }}</span>
-          <div *ngFor="let event of getEventsForDay(day.date)" class="event">
-            {{ event.time }} - {{ event.title }}
-          </div>
+          @for (event of getEventsForDay(day.date); track event.id) {
+            <div class="event">{{ event.time }} - {{ event.title }}</div>
+          }
         </div>
       }
     } @else {
@@ -93,20 +95,19 @@
             {{ weekdays()[day.date.getDay() === 0 ? 6 : day.date.getDay() - 1] }} {{ day.number }}
           </div>
           <div class="time-wrapper">
-            <div
-              (click)="openSlotDialog(day.date, hour)"
-              *ngFor="let hour of workingHours"
-              class="time-cell"
-            >
-              <div *ngFor="let event of getEventsForDayAndHour(day.date, hour)" class="event">
-                {{ event.title }}
+            @for (hour of workingHours; track hour) {
+              <div (click)="openSlotDialog(day.date, hour)" class="time-cell">
+                @for (event of getEventsForDayAndHour(day.date, hour); track event.id) {
+                  <div class="event" [style.height.px]="60">
+                    {{ event.title }}
+                  </div>
+                }
               </div>
-            </div>
-            <div
-              *ngIf="shouldShowTimeLine(day.date)"
-              [style.top.px]="currentTimePosition()"
-              class="current-time-line"
-            ></div>
+            }
+
+            @if (shouldShowTimeLine(day.date)) {
+              <div [style.top.px]="currentTimePosition()" class="current-time-line"></div>
+            }
           </div>
         </div>
       }

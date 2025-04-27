@@ -1,0 +1,108 @@
+<form (ngSubmit)="onSave()" [formGroup]="form">
+  <fieldset class="space-y-8 mb-6">
+    <div class="flex flex-col">
+      <label>Klient</label>
+      <p-select
+        [filter]="true"
+        [options]="clients"
+        appendTo="body"
+        formControlName="client_id"
+        optionLabel="first_name"
+        optionValue="user_id"
+      >
+        <ng-template let-option pTemplate="item">
+          {{ option.first_name + ' ' + option.last_name + '&nbsp;' }}
+          <span class="text-primary">({{ option.phone }})</span>
+        </ng-template>
+        <ng-template let-option pTemplate="selectedItem">
+          {{ option.first_name + ' ' + option.last_name + '&nbsp;' }}
+          <span class="text-primary">({{ option.phone }})</span>
+        </ng-template>
+      </p-select>
+    </div>
+    <div class="flex flex-col">
+      <label>Wybierz usługę</label>
+      <p-select
+        [filter]="true"
+        [options]="services"
+        appendTo="body"
+        formControlName="service_id"
+        optionLabel="name"
+        optionValue="service_id"
+      ></p-select>
+    </div>
+    <div class="flex flex-col">
+      <label>Wybierz pracownika</label>
+      <p-select
+        (onChange)="setAvailableVisits()"
+        [options]="employers"
+        appendTo="body"
+        formControlName="employee_id"
+        optionLabel="first_name"
+        optionValue="user_id"
+        placeholder=""
+      ></p-select>
+    </div>
+    <div class="flex flex-col">
+      <label>Data wizyty</label>
+      <p-calendar appendTo="body" dateFormat="dd.mm.yy" formControlName="service_date"></p-calendar>
+    </div>
+    <div class="flex flex-col">
+      <label class="mb-3 required">Godzina wizyty</label>
+      <div class="flex flex-row gap-2">
+        @for (visit of availableVisits; track visit) {
+          <p-chip [label]="visit"></p-chip>
+        }
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <label>Uwagi dotyczące wizity</label>
+      <textarea formControlName="notes" pTextarea></textarea>
+    </div>
+  </fieldset>
+  <div class="flex justify-end">
+    <button label="Dodaj" pButton></button>
+  </div>
+</form>
+
+<!--+---------------------------------------------+
+| Dodaj nową wizytę                    [X]    |
++---------------------------------------------+
+| 1. Klient                                  |
+| +----------------------------------------+ |
+| | Wyszukaj klienta... [🔍]               | |
+| | [Dodaj nowego klienta]                 | |
+| | Jan Kowalski, tel: 123-456-789         | |
+| +----------------------------------------+ |
++---------------------------------------------+
+| 2. Data i czas                             |
+| +----------------------------------------+ |
+| | [Kalendarz: 15-04-25]                  | |
+| | [09:00] [09:30] [10:00] [10:30]        | |
+| | Czas trwania: 1h 30min                 | |
+| +----------------------------------------+ |
++---------------------------------------------+
+| 3. Pracownik i usługi                      |
+| +----------------------------------------+ |
+| | Pracownik: [Anna Nowak ▼] [●]          | |
+| |----------------------------------------| |
+| | Usługi: [Manicure ▼] [Dodaj +]         | |
+| | - Manicure | 1h | 120 zł | [🗑️]        | |
+| | Łącznie: 1h, 120 zł                    | |
+| +----------------------------------------+ |
++---------------------------------------------+
+| 4. Płatność i rabaty (opcjonalne)          |
+| +----------------------------------------+ |
+| | [>] Rozwiń                             | |
+| | ( ) Płatność w salonie                | |
+| | [ ] Promocja: [10% ▼]                 | |
+| +----------------------------------------+ |
++---------------------------------------------+
+| 5. Notatki i powiadomienia                 |
+| +----------------------------------------+ |
+| | [Wpisz notatki...]                    | |
+| | [✔] Wyślij potwierdzenie SMS/email     | |
+| +----------------------------------------+ |
+|                                            |
+| [Anuluj] [Zapisz szkic] [Dodaj wizytę]    |
++---------------------------------------------+-->

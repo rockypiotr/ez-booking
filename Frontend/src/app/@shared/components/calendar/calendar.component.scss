@@ -116,7 +116,6 @@
 .time-cell {
   height: 60px;
   border-bottom: 1px solid #eee;
-  padding: 0.5rem;
   cursor: pointer;
 }
 
@@ -131,4 +130,10 @@
   height: 2px;
   background: red;
   z-index: 10;
+}
+
+
+.event {
+  background-color: #999999;
+  border-radius: 5px;
 }

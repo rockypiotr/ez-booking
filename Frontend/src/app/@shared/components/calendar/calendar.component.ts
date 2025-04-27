@@ -4,7 +4,7 @@ import { Component, computed, EventEmitter, inject, Input, Output, signal } from
 import { FormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Button } from 'primeng/button';
-import { Select } from 'primeng/select';
+import { MultiSelect } from 'primeng/multiselect';
 import { CalendarEvent } from './models/calendar-event';
 import { CalendarResource } from './models/calendar-resource';
 import { CalendarSlot } from './models/calendar-slot';
@@ -13,7 +13,7 @@ type ViewMode = 'day' | 'week' | 'month';
 
 @Component({
   selector: 'app-calendar',
-  imports: [CommonModule, Button, FormsModule, Select],
+  imports: [CommonModule, Button, FormsModule, MultiSelect],
   templateUrl: './calendar.component.html',
   standalone: true,
   styleUrl: './calendar.component.scss',
@@ -21,7 +21,7 @@ type ViewMode = 'day' | 'week' | 'month';
 export class CalendarComponent {
   @Input() resources: CalendarResource[] = [];
   @Input() events: CalendarEvent[] = [];
-  @Input() workingHours: string[] = Array.from({ length: 12 }, (_, i) => `${i + 8}:00`);
+  @Input() workingHours: string[] = Array.from({ length: 18 }, (_, i) => `${i + 6}:00`);
   @Input() initialDate: Date = new Date();
   @Input() customWeekdays: string[] | null = null;
   @Output() slotClicked = new EventEmitter<CalendarSlot>();
@@ -56,6 +56,7 @@ export class CalendarComponent {
     }
   });
   protected readonly style = style;
+  protected readonly event = event;
   private readonly translateService = inject(TranslateService);
   private readonly locale: string = this.translateService.currentLang;
   weekdays = computed(() => {

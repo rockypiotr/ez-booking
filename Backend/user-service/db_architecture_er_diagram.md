@@ -1,0 +1,74 @@
+erDiagram
+USERS ||--o{ USER_ROLES : has
+USERS ||--o{ APPOINTMENTS : books
+USERS ||--o{ REVIEWS : writes
+USERS ||--o{ LOYALTY_POINTS : earns
+USERS ||--o{ GIFT_CARDS : buys
+USERS ||--o{ USER_PREFERENCES : has
+USERS ||--o{ CONSULTATION_FORMS : fills
+USERS ||--o{ USER_FORM_SUBMISSIONS : submits
+USERS ||--o{ PAYMENTS : makes
+USERS ||--o{ SUBSCRIPTIONS : subscribes
+USERS ||--o{ USER_NOTIFICATIONS : receives
+USERS ||--o{ USER_NOTES : receives
+USERS ||--o{ DEVICE_TOKENS : registers
+
+    EMPLOYEES ||--o{ EMPLOYEE_SERVICES : provides
+    EMPLOYEES ||--o{ APPOINTMENTS : serves
+    EMPLOYEES ||--o{ EMPLOYEE_SCHEDULE : has
+    EMPLOYEES ||--o{ REVIEWS : receives
+    EMPLOYEES ||--o{ EMPLOYEE_PORTFOLIO : showcases
+    EMPLOYEES }|--|| USERS : is
+
+    SERVICES ||--o{ SERVICE_CATEGORIES : belongs
+    SERVICES ||--o{ EMPLOYEE_SERVICES : assigned
+    SERVICES ||--o{ APPOINTMENT_SERVICES : included
+    SERVICES ||--o{ SERVICE_PACKAGES_DETAILS : part_of
+    SERVICES ||--o{ SUBSCRIPTION_SERVICES : part_of
+
+    SERVICE_PACKAGES ||--o{ SERVICE_PACKAGES_DETAILS : contains
+    SERVICE_PACKAGES ||--o{ APPOINTMENT_SERVICES : booked
+
+    APPOINTMENTS ||--o{ APPOINTMENT_SERVICES : includes
+    APPOINTMENTS ||--o{ PAYMENTS : generates
+    APPOINTMENTS ||--o{ LOYALTY_TRANSACTIONS : generates
+    APPOINTMENTS ||--o{ APPOINTMENT_REMINDERS : schedules
+    APPOINTMENTS ||--o{ APPOINTMENT_PROMOTIONS : applies
+    APPOINTMENTS ||--o{ USER_FORM_SUBMISSIONS : collects
+
+    BUSINESS ||--o{ BUSINESS_LOCATIONS : has
+    BUSINESS ||--o{ BUSINESS_SETTINGS : configures
+    BUSINESS ||--o{ MARKETING_CAMPAIGNS : creates
+    BUSINESS ||--o{ SERVICE_CATEGORIES : categorizes
+    BUSINESS ||--o{ PRODUCT_CATEGORIES : organizes
+    BUSINESS ||--o{ LOYALTY_PROGRAMS : offers
+
+    BUSINESS_LOCATIONS ||--o{ EMPLOYEES : employs
+    BUSINESS_LOCATIONS ||--o{ INVENTORY_ITEMS : stocks
+    BUSINESS_LOCATIONS ||--o{ BUSINESS_HOURS : schedules
+    BUSINESS_LOCATIONS ||--o{ APPOINTMENTS : hosts
+    BUSINESS_LOCATIONS ||--o{ QUEUE_SYSTEM : manages
+    
+    PRODUCTS ||--o{ INVENTORY_ITEMS : tracked_as
+    PRODUCTS ||--o{ PRODUCT_CATEGORIES : belongs
+    PRODUCTS ||--o{ PRODUCT_SALES : sold_as
+    PRODUCTS }|--|| BUSINESS : offers
+
+    PAYMENTS ||--o{ PAYMENT_METHODS : uses
+    PAYMENTS ||--o{ PRODUCT_SALES : includes
+    PAYMENTS ||--o{ LOYALTY_TRANSACTIONS : generates
+    
+    MARKETING_CAMPAIGNS ||--o{ PROMOTIONS : contains
+    PROMOTIONS ||--o{ APPOINTMENT_PROMOTIONS : applied
+
+    LOYALTY_PROGRAMS ||--o{ LOYALTY_TIERS : defines
+    LOYALTY_PROGRAMS ||--o{ LOYALTY_POINTS : assigns
+    LOYALTY_PROGRAMS ||--o{ LOYALTY_TRANSACTIONS : records
+
+    CONSULTATION_FORMS }|--|| BUSINESS : creates
+    CONSULTATION_FORMS ||--o{ USER_FORM_SUBMISSIONS : completed
+
+    NOTIFICATION_TEMPLATES }|--|| BUSINESS : defines
+    NOTIFICATION_TEMPLATES ||--o{ USER_NOTIFICATIONS : generates
+
+    SUBSCRIPTIONS ||--o{ SUBSCRIPTION_SERVICES : includes
