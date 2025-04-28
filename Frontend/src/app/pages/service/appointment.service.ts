@@ -2,12 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
-import { environment } from '../../../environments/environment';
 import {
   CreateAppointmentRequest,
   CreateAppointmentResponse,
 } from '../../@shared/models/appointment';
 import { EmployeeSelectorOption } from '../../@shared/models/employee-selector';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',

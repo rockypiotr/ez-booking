@@ -3,7 +3,6 @@ import { inject, Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
 import { AppState } from '../../@core/store/app.state';
 import { logout } from '../../@core/store/auth/auth.action';
 import { selectIsAuthenticated } from '../../@core/store/auth/auth.selectors';
@@ -13,6 +12,7 @@ import {
   RegisterRequest,
   RegisterResponse,
 } from '../../@shared/models/auth';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',

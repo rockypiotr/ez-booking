@@ -1,0 +1,49 @@
+:host {
+  display: block;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+h1 {
+  color: #000;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.bg-white {
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.text-yellow-500 {
+  color: #f59e0b;
+}
+
+.bg-black {
+  background-color: #000;
+}
+
+.text-blue-600 {
+  color: #000;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.bg-black.text-white {
+  background-color: #000;
+  color: #fff;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #333;
+  }
+}

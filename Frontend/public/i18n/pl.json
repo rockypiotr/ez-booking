@@ -43,5 +43,25 @@
       "CLIENT": "Klient",
       "BUSINESS": "Użytkownik biznesowy"
     }
+  },
+  "employee-list": {
+    "title": "Nasz zespół",
+    "loading": "Wczytywanie pracowników...",
+    "error": "Błąd podczas wczytywania pracowników. Spróbuj ponownie później.",
+    "services": "Usługi",
+    "moreServices": "więcej usług",
+    "schedule": "Harmonogram",
+    "reviews": "opinii",
+    "viewProfile": "Zobacz profil",
+    "bookNow": "Zarezerwuj wizytę"
+  },
+  "day": {
+    "Monday": "Poniedziałek",
+    "Tuesday": "Wtorek",
+    "Wednesday": "Środa",
+    "Thursday": "Czwartek",
+    "Friday": "Piątek",
+    "Saturday": "Sobota",
+    "Sunday": "Niedziela"
   }
 }
