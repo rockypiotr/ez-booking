@@ -3,7 +3,15 @@
     "login": "Zaloguj się",
     "register": "Zarejestruj się",
     "moveOn": "Przejdź dalej",
-    "back": "Powrót"
+    "back": "Powrót",
+    "apply": "Zastosuj",
+    "cancel": "Anuluj",
+    "delete": "Usuń"
+  },
+  "message": {
+    "severity": {
+      "success": "Sukces"
+    }
   },
   "appointment": {
     "modal": {
@@ -56,13 +64,13 @@
     "bookNow": "Zarezerwuj wizytę"
   },
   "day": {
-    "Monday": "Poniedziałek",
-    "Tuesday": "Wtorek",
-    "Wednesday": "Środa",
-    "Thursday": "Czwartek",
-    "Friday": "Piątek",
-    "Saturday": "Sobota",
-    "Sunday": "Niedziela"
+    "monday": "Poniedziałek",
+    "tuesday": "Wtorek",
+    "wednesday": "Środa",
+    "thursday": "Czwartek",
+    "friday": "Piątek",
+    "saturday": "Sobota",
+    "sunday": "Niedziela"
   },
   "service-list": {
     "title": "Usługi",
@@ -100,6 +108,50 @@
   "menu": {
     "dashboard": "Dashboard",
     "employees": "Pracownicy",
-    "services": "Usługi"
+    "services": "Usługi",
+    "businessHours": "Godziny otwarcia"
+  },
+  "business-hours": {
+    "title": "Godziny otwarcia",
+    "loading": "Wczytywanie godzin otwarcia...",
+    "error": "Błąd podczas wczytywania godzin otwarcia. Spróbuj ponownie później.",
+    "retry": "Spróbuj ponownie",
+    "weeklySchedule": "Harmonogram tygodniowy",
+    "open": "Otwarte",
+    "closed": "Zamknięte",
+    "enterName": "Nazwa dnia wolnego",
+    "openTime": "Godzina otwarcia",
+    "closeTime": "Godzina zamknięcia",
+    "hasBreak": "Przerwa",
+    "breakStartTime": "Początek przerwy",
+    "breakEndTime": "Koniec przerwy",
+    "invalidBreakTime": "Czas przerwy nie może wykraczać poza godziny otwarcia",
+    "applyToAll": "Zastosuj dla wszystkich",
+    "applyToAllDays": "Zastosuj te same ustawienia dla wszystkich dni tygodnia",
+    "specialClosureDays": "Dni wolne",
+    "addSpecialClosureDay": "Dodaj dzień wolny",
+    "noSpecialClosureDays": "Brak zdefiniowanych dni wolnych",
+    "date": "Data",
+    "selectDate": "Wybierz datę",
+    "name": "Nazwa",
+    "actions": "Akcje",
+    "delete": "Usuń",
+    "add": "Dodaj",
+    "cancel": "Anuluj",
+    "allowBookingsOutsideBusinessHours": "Zezwalaj na rezerwacje poza godzinami otwarcia",
+    "save": "Zapisz",
+    "saving": "Zapisywanie...",
+    "confirmApplyAll": "Zastosuj dla wszystkich dni",
+    "confirmApplyAllMessage": "Czy na pewno chcesz zastosować te ustawienia dla wszystkich dni?",
+    "settingsApplied": "Ustawienia zostały zastosowane",
+    "success": "Sukces",
+    "saveSuccess": "Godziny otwarcia zostały zapisane",
+    "saveFailed": "Nie udało się zapisać godzin otwarcia",
+    "validationError": "Formularz zawiera błędy",
+    "missingDateOrName": "Data i nazwa są wymagane",
+    "dateAlreadyExists": "Ten dzień jest już oznaczony jako wolny",
+    "closureDayDeleted": "Dzień wolny został usunięty",
+    "confirmDelete": "Usuń dzień wolny?",
+    "confirmDeleteMessage": "Czy na pewno chcesz usunąć dzień wolny?"
   }
 }

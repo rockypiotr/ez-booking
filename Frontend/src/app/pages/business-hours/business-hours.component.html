@@ -1,0 +1,268 @@
+<div class="container mx-auto px-4 py-8">
+  <p-card>
+    <ng-template pTemplate="header">
+      <div class="p-4">
+        <h1 class="text-3xl font-bold text-center">{{ 'business-hours.title' | translate }}</h1>
+      </div>
+    </ng-template>
+
+    @if (loading) {
+      <div class="flex justify-center items-center h-64">
+        <i class="pi pi-spin pi-spinner text-4xl"></i>
+        <p class="text-xl ml-3">{{ 'business-hours.loading' | translate }}</p>
+      </div>
+    }
+
+    @if (error) {
+      <div class="flex justify-center items-center h-64">
+        <div class="text-center">
+          <i class="pi pi-exclamation-triangle text-4xl text-red-500 mb-4"></i>
+          <p class="text-xl text-red-500">{{ 'business-hours.error' | translate }}</p>
+          <button pButton type="button" label="{{ 'business-hours.retry' | translate }}" icon="pi pi-refresh"
+                  class="p-button-outlined mt-4" (click)="loadBusinessHours()"></button>
+        </div>
+      </div>
+    }
+
+    @if (!loading && !error) {
+      <form [formGroup]="weeklyScheduleForm" (ngSubmit)="saveBusinessHours()">
+        <!-- Weekly Schedule Section -->
+        <p-card styleClass="mb-5" [header]="'business-hours.weeklySchedule' | translate">
+          <div class="grid grid-cols-1 gap-6">
+            @for (day of dayOfWeek; track day) {
+              <p-card [formGroupName]="day" styleClass="border-1 border-gray-200">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                  <div class="flex items-center mb-3 md:mb-0">
+                    <h3 class="text-xl font-medium">{{ 'day.' + day | translate }}</h3>
+                    <div class="ml-4 flex items-center">
+                      <p-toggleswitch formControlName="isOpen"></p-toggleswitch>
+                      <span class="ml-2 text-base">{{ weeklyScheduleForm.get(day)?.get('isOpen')?.value ?
+                          ('business-hours.open' | translate) : ('business-hours.closed' | translate) }}</span>
+                    </div>
+                  </div>
+
+                  <button
+                    pButton
+                    type="button"
+                    icon="pi pi-copy"
+                    label="{{ 'business-hours.applyToAll' | translate }}"
+                    class="p-button-secondary p-button-sm"
+                    (click)="applyToAllDays(day)"
+                    pTooltip="{{ 'business-hours.applyToAllDays' | translate }}"
+                  ></button>
+                </div>
+
+                <p-divider *ngIf="weeklyScheduleForm.get(day)?.get('isOpen')?.value"></p-divider>
+
+                @if (weeklyScheduleForm.get(day)?.get('isOpen')?.value) {
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div class="flex flex-col">
+                      <label class="mb-2 text-base font-medium">{{ 'business-hours.openTime' | translate }}</label>
+                      <p-calendar
+                        appendTo="body"
+                        formControlName="openTime"
+                        [timeOnly]="true"
+                        [showSeconds]="false"
+                        [showIcon]="true"
+                        [showTime]="true"
+                        [readonlyInput]="true"
+                      ></p-calendar>
+                    </div>
+                    <div class="flex flex-col">
+                      <label class="mb-2 text-base font-medium">{{ 'business-hours.closeTime' | translate }}</label>
+                      <p-calendar
+                        appendTo="body"
+                        formControlName="closeTime"
+                        [timeOnly]="true"
+                        [showSeconds]="false"
+                        [showIcon]="true"
+                        [showTime]="true"
+                        [readonlyInput]="true"
+                      ></p-calendar>
+                    </div>
+                  </div>
+
+                  <div class="mt-4">
+                    <div class="flex items-center mb-3">
+                      <p-toggleswitch formControlName="hasBreak"></p-toggleswitch>
+                      <span class="ml-2 text-base">{{ 'business-hours.hasBreak' | translate }}</span>
+                    </div>
+
+                    @if (weeklyScheduleForm.get(day)?.get('hasBreak')?.value) {
+                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3 p-3 bg-gray-50 rounded-lg">
+                        <div class="flex flex-col">
+                          <label class="mb-2 text-base font-medium">{{ 'business-hours.breakStartTime' | translate }}</label>
+                          <p-calendar
+                            appendTo="body"
+                            formControlName="breakStartTime"
+                            [timeOnly]="true"
+                            [showSeconds]="false"
+                            [showIcon]="true"
+                            [showTime]="true"
+                            [readonlyInput]="true"
+                          ></p-calendar>
+                        </div>
+                        <div class="flex flex-col">
+                          <label class="mb-2 text-base font-medium">{{ 'business-hours.breakEndTime' | translate }}</label>
+                          <p-calendar
+                            appendTo="body"
+                            formControlName="breakEndTime"
+                            [timeOnly]="true"
+                            [showSeconds]="false"
+                            [showIcon]="true"
+                            [showTime]="true"
+                            [readonlyInput]="true"
+                          ></p-calendar>
+                        </div>
+
+                        @if (isBreakTimeInvalid(day)) {
+                          <div class="col-span-2 mt-2">
+                            <p class="text-red-500">
+                              <i class="pi pi-exclamation-circle mr-2"></i>
+                              {{ 'business-hours.invalidBreakTime' | translate }}
+                            </p>
+                          </div>
+                        }
+                      </div>
+                    }
+                  </div>
+                }
+              </p-card>
+            }
+          </div>
+        </p-card>
+
+        <!-- Special Closure Days Section -->
+        <p-card styleClass="mb-5" [header]="'business-hours.specialClosureDays' | translate">
+          <div class="flex justify-end mb-4">
+            <button
+              pButton
+              type="button"
+              icon="pi pi-plus"
+              label="{{ 'business-hours.addSpecialClosureDay' | translate }}"
+              class="p-button-primary"
+              (click)="openSpecialClosureDayDialog()"
+            ></button>
+          </div>
+
+          @if (!businessHours?.specialClosureDays?.length) {
+            <div class="p-4 bg-gray-50 rounded-lg text-center">
+              <i class="pi pi-calendar-times text-2xl text-gray-400 mb-2"></i>
+              <p class="text-gray-500">{{ 'business-hours.noSpecialClosureDays' | translate }}</p>
+            </div>
+          } @else {
+            <p-table
+              [value]="businessHours?.specialClosureDays || []"
+              styleClass="p-datatable-sm"
+              [tableStyle]="{'min-width': '100%'}"
+            >
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>{{ 'business-hours.date' | translate }}</th>
+                  <th>{{ 'business-hours.name' | translate }}</th>
+                  <th style="width: 100px">{{ 'business-hours.actions' | translate }}</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-day>
+                <tr>
+                  <td>{{ day.date }}</td>
+                  <td>{{ day.name }}</td>
+                  <td>
+                    <button
+                      pButton
+                      type="button"
+                      icon="pi pi-trash"
+                      class="p-button-text p-button-danger p-button-sm"
+                      (click)="deleteSpecialClosureDay(day.id)"
+                      pTooltip="{{ 'business-hours.delete' | translate }}"
+                    ></button>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          }
+        </p-card>
+
+        <!-- Allow Bookings Outside Business Hours -->
+        <p-card styleClass="mb-5">
+          <div class="flex items-center p-3">
+            <p-toggleswitch formControlName="allowBookingsOutsideBusinessHours"></p-toggleswitch>
+            <span class="ml-3 text-base">{{ 'business-hours.allowBookingsOutsideBusinessHours' | translate }}</span>
+          </div>
+        </p-card>
+
+        <!-- Save Button -->
+        <div class="flex justify-end">
+          <button
+            pButton
+            type="submit"
+            icon="pi pi-save"
+            [loading]="saving"
+            label="{{ saving ? ('business-hours.saving' | translate) : ('business-hours.save' | translate) }}"
+            [disabled]="weeklyScheduleForm.invalid || saving"
+          ></button>
+        </div>
+      </form>
+    }
+  </p-card>
+</div>
+
+<!-- Special Closure Day Dialog -->
+<p-dialog
+  [(visible)]="showSpecialClosureDayDialog"
+  [style]="{width: '500px'}"
+  [header]="'business-hours.addSpecialClosureDay' | translate"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div class="flex flex-col gap-4 p-4">
+    <div class="mb-3">
+      <label for="closureDate" class="block mb-2 text-base font-medium">{{ 'business-hours.date' | translate }}</label>
+      <p-calendar
+        appendTo="body"
+        id="closureDate"
+        [(ngModel)]="specialClosureDayDate"
+        [showIcon]="true"
+        dateFormat="yy-mm-dd"
+        [readonlyInput]="true"
+        styleClass="w-full"
+        placeholder="{{ 'business-hours.selectDate' | translate }}"
+      ></p-calendar>
+    </div>
+    <div class="mb-3">
+      <label for="closureName" class="block mb-2 text-base font-medium">{{ 'business-hours.name' | translate }}</label>
+      <input
+        id="closureName"
+        type="text"
+        pInputText
+        [(ngModel)]="specialClosureDayName"
+        class="w-full"
+        placeholder="{{ 'business-hours.enterName' | translate }}"
+      >
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      type="button"
+      icon="pi pi-times"
+      label="{{ 'button.cancel' | translate }}"
+      class="p-button-text"
+      (click)="showSpecialClosureDayDialog = false"
+    ></button>
+    <button
+      pButton
+      type="button"
+      icon="pi pi-check"
+      label="{{ 'button.add' | translate }}"
+      (click)="addSpecialClosureDay()"
+    ></button>
+  </ng-template>
+</p-dialog>
+
+<!-- Confirmation Dialog -->
+<p-confirmDialog [styleClass]="'w-4/5 md:w-2/3 lg:w-1/2'" rejectButtonStyleClass="p-button-text" acceptButtonStyleClass="p-button-danger"></p-confirmDialog>
+
+<!-- Toast Messages -->
+<p-toast position="top-right"></p-toast>

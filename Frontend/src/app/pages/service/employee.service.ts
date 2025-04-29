@@ -45,19 +45,19 @@ export class EmployeeService {
         schedule: [
           {
             id: '1',
-            day: 'Monday',
+            day: 'monday',
             startTime: '09:00',
             endTime: '17:00',
           },
           {
             id: '2',
-            day: 'Wednesday',
+            day: 'wednesday',
             startTime: '09:00',
             endTime: '17:00',
           },
           {
             id: '3',
-            day: 'Friday',
+            day: 'friday',
             startTime: '09:00',
             endTime: '17:00',
           },
@@ -110,19 +110,19 @@ export class EmployeeService {
         schedule: [
           {
             id: '4',
-            day: 'Tuesday',
+            day: 'tuesday',
             startTime: '09:00',
             endTime: '17:00',
           },
           {
             id: '5',
-            day: 'Thursday',
+            day: 'thursday',
             startTime: '09:00',
             endTime: '17:00',
           },
           {
             id: '6',
-            day: 'Saturday',
+            day: 'saturday',
             startTime: '09:00',
             endTime: '15:00',
           },
@@ -175,19 +175,19 @@ export class EmployeeService {
         schedule: [
           {
             id: '7',
-            day: 'Monday',
+            day: 'monday',
             startTime: '12:00',
             endTime: '20:00',
           },
           {
             id: '8',
-            day: 'Wednesday',
+            day: 'wednesday',
             startTime: '12:00',
             endTime: '20:00',
           },
           {
             id: '9',
-            day: 'Friday',
+            day: 'friday',
             startTime: '12:00',
             endTime: '20:00',
           },
@@ -240,19 +240,19 @@ export class EmployeeService {
         schedule: [
           {
             id: '10',
-            day: 'Tuesday',
+            day: 'tuesday',
             startTime: '10:00',
             endTime: '18:00',
           },
           {
             id: '11',
-            day: 'Thursday',
+            day: 'thursday',
             startTime: '10:00',
             endTime: '18:00',
           },
           {
             id: '12',
-            day: 'Saturday',
+            day: 'saturday',
             startTime: '10:00',
             endTime: '16:00',
           },

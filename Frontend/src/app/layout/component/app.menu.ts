@@ -38,6 +38,11 @@ export class AppMenu {
                         label: 'menu.services',
                         icon: 'pi pi-fw pi-list',
                         routerLink: ['/pages/services']
+                    },
+                    {
+                        label: 'menu.businessHours',
+                        icon: 'pi pi-fw pi-clock',
+                        routerLink: ['/pages/business-hours']
                     }
                 ]
             },
