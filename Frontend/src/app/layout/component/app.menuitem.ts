@@ -7,14 +7,15 @@ import { CommonModule } from '@angular/common';
 import { RippleModule } from 'primeng/ripple';
 import { MenuItem } from 'primeng/api';
 import { LayoutService } from '../service/layout.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[app-menuitem]',
-    imports: [CommonModule, RouterModule, RippleModule],
+  imports: [CommonModule, RouterModule, RippleModule, TranslatePipe],
     template: `
         <ng-container>
-            <div *ngIf="root && item.visible !== false" class="layout-menuitem-root-text">{{ item.label }}</div>
+            <div *ngIf="root && item.visible !== false" class="layout-menuitem-root-text">{{ item.label || '' | translate }}</div>
             <a *ngIf="(!item.routerLink || item.items) && item.visible !== false" [attr.href]="item.url" (click)="itemClick($event)" [ngClass]="item.styleClass" [attr.target]="item.target" tabindex="0" pRipple>
                 <i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
                 <span class="layout-menuitem-text">{{ item.label }}</span>
@@ -39,7 +40,7 @@ import { LayoutService } from '../service/layout.service';
                 pRipple
             >
                 <i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
-                <span class="layout-menuitem-text">{{ item.label }}</span>
+                <span class="layout-menuitem-text">{{ item.label || '' | translate }}</span>
                 <i class="pi pi-fw pi-angle-down layout-submenu-toggler" *ngIf="item.items"></i>
             </a>
 
@@ -74,7 +75,7 @@ export class AppMenuitem {
 
     @Input() index!: number;
 
-    @Input() @HostBinding('class.layout-root-menuitem') root!: boolean;
+    @Input() @HostBinding(          'class.layout-root-menuitem') root!: boolean;
 
     @Input() parentKey!: string;
 

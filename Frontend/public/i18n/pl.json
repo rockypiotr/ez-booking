@@ -63,5 +63,43 @@
     "Friday": "Piątek",
     "Saturday": "Sobota",
     "Sunday": "Niedziela"
+  },
+  "service-list": {
+    "title": "Usługi",
+    "addService": "Dodaj usługę",
+    "loading": "Wczytywanie usług...",
+    "error": "Błąd podczas wczytywania usług. Spróbuj ponownie później.",
+    "name": "Nazwa",
+    "description": "Opis",
+    "category": "Kategoria",
+    "employees": "Pracownicy",
+    "actions": "Akcje",
+    "edit": "Edytuj",
+    "delete": "Usuń"
+  },
+  "service-edit": {
+    "titleNew": "Dodaj nową usługę",
+    "titleEdit": "Edytuj usługę",
+    "loading": "Wczytywanie danych...",
+    "error": "Błąd podczas wczytywania danych. Spróbuj ponownie później.",
+    "basicInfo": "Podstawowe informacje",
+    "name": "Nazwa",
+    "nameRequired": "Nazwa jest wymagana",
+    "description": "Opis",
+    "descriptionRequired": "Opis jest wymagany",
+    "category": "Kategoria",
+    "employeePricing": "Ceny i czas trwania dla pracowników",
+    "employeePricingHelp": "Ustaw różne ceny i czasy trwania dla każdego pracownika. Zaznacz pole, aby włączyć usługę dla danego pracownika.",
+    "enabledForEmployee": "Włącz dla tego pracownika",
+    "duration": "Czas trwania",
+    "price": "Cena",
+    "cancel": "Anuluj",
+    "save": "Zapisz",
+    "saving": "Zapisywanie..."
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "employees": "Pracownicy",
+    "services": "Usługi"
   }
 }

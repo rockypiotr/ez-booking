@@ -1,0 +1,87 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="flex justify-between items-center mb-8">
+    <h1 class="text-3xl font-bold text-center">{{ 'service-list.title' | translate }}</h1>
+    <a [routerLink]="['/pages/services/new']" class="bg-black text-white px-4 py-2 rounded  hover:bg-gray-800">
+      {{ 'service-list.addService' | translate }}
+    </a>
+  </div>
+
+  @if (loading) {
+    <div class="flex justify-center items-center h-64">
+      <p class="text-lg">{{ 'service-list.loading' | translate }}</p>
+    </div>
+  }
+
+  @if (error) {
+    <div class="flex justify-center items-center h-64">
+      <p class="text-lg text-red-500">{{ 'service-list.error' | translate }}</p>
+    </div>
+  }
+
+  @if (!loading && !error) {
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
+                {{ 'service-list.name' | translate }}
+              </th>
+              <th scope="col" class="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
+                {{ 'service-list.description' | translate }}
+              </th>
+              <th scope="col" class="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
+                {{ 'service-list.category' | translate }}
+              </th>
+              <th scope="col" class="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
+                {{ 'service-list.employees' | translate }}
+              </th>
+              <th scope="col" class="px-6 py-3 text-left  font-medium text-gray-500 uppercase tracking-wider">
+                {{ 'service-list.actions' | translate }}
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            @for (service of services; track service.id) {
+              <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class=" font-medium text-gray-900">{{ service.name }}</div>
+                </td>
+                <td class="px-6 py-4">
+                  <div class=" text-gray-500">{{ service.description }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <div class=" text-gray-500">{{ service.category }}</div>
+                </td>
+                <td class="px-6 py-4">
+                  <div class=" text-gray-500">
+                    <ul>
+                      @for (employeeService of service.employeeServices; track employeeService.employeeId) {
+                        <li class="mb-2">
+                          <div class="font-medium">{{ employeeService.employeeName }}</div>
+                          <div>
+                            {{ employeeService.duration }} min • {{ employeeService.price }} zł
+                          </div>
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap  font-medium">
+                  <div class="flex space-x-2">
+                    <a [routerLink]="['/pages/services/edit', service.id]" class="text-blue-600 hover:text-blue-900">
+                      {{ 'service-list.edit' | translate }}
+                    </a>
+                    <button (click)="deleteService(service.id)" class="text-red-600 hover:text-red-900">
+                      {{ 'service-list.delete' | translate }}
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  }
+</div>
