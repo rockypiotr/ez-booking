@@ -64,6 +64,27 @@
     "viewProfile": "Zobacz profil",
     "bookNow": "Zarezerwuj wizytę"
   },
+  "employee-details": {
+    "backToList": "Powrót do listy pracowników",
+    "loading": "Wczytywanie danych pracownika...",
+    "error": "Błąd podczas wczytywania danych pracownika. Spróbuj ponownie później.",
+    "reviews": "opinii",
+    "bookNow": "Zarezerwuj wizytę",
+    "contactInfo": "Informacje kontaktowe",
+    "email": "Email",
+    "phone": "Telefon",
+    "about": "O pracowniku",
+    "services": "Oferowane usługi",
+    "serviceName": "Nazwa usługi",
+    "description": "Opis",
+    "duration": "Czas trwania",
+    "price": "Cena",
+    "minutes": "min",
+    "schedule": "Harmonogram pracy",
+    "noReviews": "Brak opinii dla tego pracownika",
+    "portfolio": "Portfolio",
+    "noPortfolio": "Brak elementów portfolio"
+  },
   "day": {
     "monday": "Poniedziałek",
     "tuesday": "Wtorek",

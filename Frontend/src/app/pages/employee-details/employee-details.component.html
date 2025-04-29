@@ -1,0 +1,195 @@
+<div class="container mx-auto p-3">
+  <p-button
+    [label]="'employee-details.backToList' | translate"
+    [routerLink]="['/pages/employees']"
+    icon="pi pi-arrow-left"
+    styleClass="p-button-text p-button-sm mb-3"
+  >
+  </p-button>
+
+  @if (loading) {
+    <div class="flex justify-content-center align-items-center" style="height: 400px">
+      <p-progressSpinner></p-progressSpinner>
+    </div>
+  }
+
+  @if (error) {
+    <p-message [text]="'employee-details.error' | translate" severity="error"></p-message>
+  }
+
+  @if (!loading && !error && employee) {
+    <p-card>
+      <!-- Header section -->
+      <ng-template pTemplate="header">
+        <div
+          class="flex flex-column md:flex-row align-items-center gap-4 p-4 bg-gray-50 border-bottom-1 border-gray-200"
+        >
+          <p-avatar
+            [image]="employee.imgUrl"
+            [style]="{ width: '150px', height: '150px' }"
+            shape="circle"
+            size="xlarge"
+          ></p-avatar>
+          <div>
+            <h1 class="text-3xl font-bold mb-2">{{ employee.name }}</h1>
+            <div class="text-gray-600 mb-2">
+              {{ employee.role }} • {{ employee.specialization }}
+            </div>
+            <div class="flex align-items-center mb-3">
+              <p-rating
+                [ngModel]="getAverageRating() === 'N/A' ? 0 : +getAverageRating()"
+                [readonly]="true"
+                stars="5"
+              >
+              </p-rating>
+              <span class="ml-2"
+              >({{ employee.reviews.length }} {{ 'employee-details.reviews' | translate }})</span
+              >
+            </div>
+
+            <p-button
+              [label]="'employee-details.bookNow' | translate"
+              [queryParams]="{ employeeId: employee.id }"
+              [routerLink]="['/appointment/new']"
+              icon="pi pi-calendar-plus"
+            >
+            </p-button>
+          </div>
+        </div>
+      </ng-template>
+
+      <!-- Contact info section -->
+      <p-divider></p-divider>
+      <h2 class="text-xl font-bold mb-3">{{ 'employee-details.contactInfo' | translate }}</h2>
+      <div class="grid grid-cols-2 gap-6">
+        <p-card styleClass="h-full shadow-none border-1 border-gray-200">
+          <div class="flex align-items-center">
+            <span class="p-3 border-round bg-primary-100 mr-3 flex-shrink-0">
+              <i class="pi pi-envelope text-primary text-xl"></i>
+            </span>
+            <div class="overflow-hidden">
+              <p class="text-gray-600 mb-1">{{ 'employee-details.email' | translate }}</p>
+              <p class="font-medium text-overflow-ellipsis overflow-hidden">
+                {{ employee.email }}
+              </p>
+            </div>
+          </div>
+          <p-divider></p-divider>
+          <p-button
+            icon="pi pi-envelope"
+            label="Send Email"
+            styleClass="p-button-sm p-button-outlined"
+          ></p-button>
+        </p-card>
+        <p-card styleClass="h-full shadow-none border-1 border-gray-200">
+          <div class="flex align-items-center">
+            <span class="p-3 border-round bg-primary-100 mr-3 flex-shrink-0">
+              <i class="pi pi-phone text-primary text-xl"></i>
+            </span>
+            <div class="overflow-hidden">
+              <p class="text-gray-600 mb-1">{{ 'employee-details.phone' | translate }}</p>
+              <p class="font-medium text-overflow-ellipsis overflow-hidden">
+                {{ employee.phone }}
+              </p>
+            </div>
+          </div>
+          <p-divider></p-divider>
+          <p-button
+            icon="pi pi-phone"
+            label="Call"
+            styleClass="p-button-sm p-button-outlined"
+          ></p-button>
+        </p-card>
+      </div>
+
+      <!-- Bio section -->
+      <p-divider></p-divider>
+      <h2 class="text-xl font-bold mb-3">{{ 'employee-details.about' | translate }}</h2>
+      <p>{{ employee.bio }}</p>
+
+      <!-- Services section -->
+      <p-divider></p-divider>
+      <h2 class="text-xl font-bold mb-3">{{ 'employee-details.services' | translate }}</h2>
+      <p-table [value]="employee.services" styleClass="p-datatable-sm">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>{{ 'employee-details.serviceName' | translate }}</th>
+            <th>{{ 'employee-details.description' | translate }}</th>
+            <th>{{ 'employee-details.duration' | translate }}</th>
+            <th>{{ 'employee-details.price' | translate }}</th>
+          </tr>
+        </ng-template>
+        <ng-template let-service pTemplate="body">
+          <tr>
+            <td>{{ service.name }}</td>
+            <td>{{ service.description }}</td>
+            <td>{{ service.duration }} {{ 'employee-details.minutes' | translate }}</td>
+            <td>{{ service.price }} zł</td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+      <!-- Use TabView for the rest of the sections -->
+      <p-divider></p-divider>
+      <p-tabView>
+        <!-- Schedule tab -->
+        <p-tabPanel [header]="'employee-details.schedule' | translate">
+          <div class="grid p-fluid gap-4">
+            @for (schedule of employee.schedule; track schedule.id) {
+              <p-card styleClass="h-full">
+                <h3>{{ 'day.' + schedule.day | translate }}</h3>
+                <p>{{ schedule.startTime }} - {{ schedule.endTime }}</p>
+              </p-card>
+            }
+          </div>
+        </p-tabPanel>
+
+        <!-- Reviews tab -->
+        <p-tabPanel [header]="'employee-details.reviews' | translate">
+          @if (employee.reviews.length === 0) {
+            <p>{{ 'employee-details.noReviews' | translate }}</p>
+          }
+          @if (employee.reviews.length > 0) {
+            <div class="grid p-fluid gap-4">
+              @for (review of employee.reviews; track review.id) {
+                <p-card styleClass="h-full">
+                  <ng-template pTemplate="header">
+                    <div class="flex justify-content-between align-items-center p-3">
+                      <div>
+                        <span class="font-medium">{{ review.userName }}</span>
+                        <p-rating [ngModel]="review.rating" [readonly]="true"></p-rating>
+                      </div>
+                      <div class="text-sm text-gray-500">{{ review.date | date: 'medium' }}</div>
+                    </div>
+                  </ng-template>
+                  <p>{{ review.comment }}</p>
+                </p-card>
+              }
+            </div>
+          }
+        </p-tabPanel>
+
+        <!-- Portfolio tab -->
+        <p-tabPanel [header]="'employee-details.portfolio' | translate">
+          @if (employee.portfolio.length === 0) {
+            <p>{{ 'employee-details.noPortfolio' | translate }}</p>
+          }
+          @if (employee.portfolio.length > 0) {
+            <div class="grid p-fluid gap-4">
+              @for (item of employee.portfolio; track item.id) {
+                <p-card styleClass="h-full">
+                  <ng-template pTemplate="header">
+                    <p-image [alt]="item.title" [preview]="true" [src]="item.imageUrl"></p-image>
+                  </ng-template>
+                  <h3 class="font-medium mb-2">{{ item.title }}</h3>
+                  <p class="mb-2">{{ item.description }}</p>
+                  <p class="text-xs text-gray-500">{{ item.date | date: 'medium' }}</p>
+                </p-card>
+              }
+            </div>
+          }
+        </p-tabPanel>
+      </p-tabView>
+    </p-card>
+  }
+</div>
