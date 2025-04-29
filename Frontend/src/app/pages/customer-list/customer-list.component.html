@@ -1,0 +1,74 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-8 text-center">{{ 'customer-list.title' | translate }}</h1>
+
+  @if (loading) {
+    <div class="flex justify-center items-center h-64">
+      <p class="text-lg">{{ 'customer-list.loading' | translate }}</p>
+    </div>
+  }
+
+  @if (error) {
+    <div class="flex justify-center items-center h-64">
+      <p class="text-lg text-red-500">{{ 'customer-list.error' | translate }}</p>
+    </div>
+  }
+
+  @if (!loading && !error) {
+    <div class="card">
+      <div class="flex justify-end mb-4">
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input type="text" pInputText [(ngModel)]="globalFilter"
+                 [placeholder]="'customer-list.search' | translate"
+                 class="p-inputtext-sm"/>
+        </span>
+      </div>
+
+      <p-table [value]="customers" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="10"
+               styleClass="p-datatable-gridlines" [rowHover]="true"
+               [globalFilterFields]="['name', 'company', 'country.name', 'status', 'representative.name']"
+               [filterDelay]="0">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>{{ 'customer-list.name' | translate }}</th>
+            <th>{{ 'customer-list.company' | translate }}</th>
+            <th>{{ 'customer-list.country' | translate }}</th>
+            <th>{{ 'customer-list.status' | translate }}</th>
+            <th>{{ 'customer-list.date' | translate }}</th>
+            <th>{{ 'customer-list.representative' | translate }}</th>
+            <th>{{ 'customer-list.activity' | translate }}</th>
+            <th>{{ 'customer-list.actions' | translate }}</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-customer>
+          <tr>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.company }}</td>
+            <td>{{ customer.country?.name }}</td>
+            <td>{{ customer.status }}</td>
+            <td>{{ customer.date }}</td>
+            <td>
+              <div class="flex items-center">
+                @if (customer.representative?.image) {
+                  <img [src]="'assets/images/' + customer.representative.image" [alt]="customer.representative?.name" class="w-8 h-8 rounded-full mr-2">
+                }
+                <span>{{ customer.representative?.name }}</span>
+              </div>
+            </td>
+            <td>{{ customer.activity }}</td>
+            <td>
+              <div class="flex gap-2">
+                <button pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-info p-button-outlined"
+                        [pTooltip]="'customer-list.viewDetailsTooltip' | translate" tooltipPosition="top"
+                        [routerLink]="['/customer', customer.id]"></button>
+                <button pButton pRipple icon="pi pi-calendar-plus" class="p-button-rounded p-button-success p-button-outlined"
+                        [pTooltip]="'customer-list.bookAppointmentTooltip' | translate" tooltipPosition="top"
+                        [routerLink]="['/appointment/new']" [queryParams]="{customerId: customer.id}"></button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  }
+</div>

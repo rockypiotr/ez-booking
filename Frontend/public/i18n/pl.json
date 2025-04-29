@@ -108,6 +108,7 @@
   "menu": {
     "dashboard": "Dashboard",
     "employees": "Pracownicy",
+    "customers": "Klienci",
     "services": "Usługi",
     "businessHours": "Godziny otwarcia"
   },
@@ -153,5 +154,24 @@
     "closureDayDeleted": "Dzień wolny został usunięty",
     "confirmDelete": "Usuń dzień wolny?",
     "confirmDeleteMessage": "Czy na pewno chcesz usunąć dzień wolny?"
+  },
+  "customer-list": {
+    "title": "Klienci",
+    "loading": "Wczytywanie klientów...",
+    "error": "Błąd podczas wczytywania klientów. Spróbuj ponownie później.",
+    "details": "Szczegóły",
+    "status": "Status",
+    "date": "Data",
+    "activity": "Aktywność",
+    "representative": "Przedstawiciel",
+    "viewDetails": "Zobacz szczegóły",
+    "bookAppointment": "Umów wizytę",
+    "name": "Imię i nazwisko",
+    "company": "Firma",
+    "country": "Kraj",
+    "actions": "Akcje",
+    "search": "Szukaj klientów",
+    "viewDetailsTooltip": "Zobacz szczegóły",
+    "bookAppointmentTooltip": "Umów wizytę"
   }
 }
