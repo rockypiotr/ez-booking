@@ -76,7 +76,7 @@
             <!-- Przyciski akcji - prawa kolumna -->
             <div
               class="w-full md:w-1/4 lg:w-1/5 p-4 flex flex-col justify-center items-center border-t md:border-t-0 md:border-l border-gray-200">
-              <a [routerLink]="['/employee', employee.id]"
+              <a [routerLink]="['/pages/employees', employee.id]"
                  class="w-full text-center text-blue-600 hover:underline text-sm mb-4">{{ 'employee-list.viewProfile' | translate }}</a>
               <a [routerLink]="['/appointment/new']" [queryParams]="{employeeId: employee.id}"
                  class="w-full text-center bg-black text-white px-4 py-2 rounded text-sm hover:bg-gray-800">{{ 'employee-list.bookNow' | translate }}</a>
