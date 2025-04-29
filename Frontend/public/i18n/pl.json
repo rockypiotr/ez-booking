@@ -6,7 +6,8 @@
     "back": "Powrót",
     "apply": "Zastosuj",
     "cancel": "Anuluj",
-    "delete": "Usuń"
+    "delete": "Usuń",
+    "add": "Dodaj"
   },
   "message": {
     "severity": {
@@ -137,7 +138,6 @@
     "name": "Nazwa",
     "actions": "Akcje",
     "delete": "Usuń",
-    "add": "Dodaj",
     "cancel": "Anuluj",
     "allowBookingsOutsideBusinessHours": "Zezwalaj na rezerwacje poza godzinami otwarcia",
     "save": "Zapisz",
