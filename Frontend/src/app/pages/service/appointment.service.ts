@@ -13,7 +13,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class AppointmentService {
-  private readonly apiUrl = environment?.apiUrl || 'https://mock-api.com/api';
+  private readonly apiUrl = environment.apiUrl;
   private readonly http = inject(HttpClient);
   private readonly fb = inject(FormBuilder);
 

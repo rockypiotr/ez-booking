@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class ServiceService {
-  private readonly apiUrl = environment?.apiUrl || 'https://mock-api.com/api';
+  private readonly apiUrl = environment.apiUrl;
   private readonly http = inject(HttpClient);
 
   getServices(): Observable<Service[]> {
@@ -149,7 +149,7 @@ export class ServiceService {
     // return this.http.get<Service>(`${this.apiUrl}/services/${id}`);
 
     // For now, return mock data
-    return of(this.getMockServices().find((service) => service.id === id));
+    return of(this.getMockServices().find(service => service.id === id));
   }
 
   createService(service: Service): Observable<Service> {
