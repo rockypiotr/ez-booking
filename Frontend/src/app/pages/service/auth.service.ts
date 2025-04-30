@@ -18,7 +18,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly apiUrl = environment.apiUrl;
+  private readonly apiUrl = environment?.apiUrl || 'https://mock-api.com/api';
   private readonly http = inject(HttpClient);
   private readonly store = inject(Store<AppState>);
   private readonly fb = inject(FormBuilder);
