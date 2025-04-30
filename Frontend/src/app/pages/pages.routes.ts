@@ -5,6 +5,7 @@ import { ServiceListComponent } from './service-list/service-list.component';
 import { ServiceEditComponent } from './service-list/service-edit/service-edit.component';
 import { BusinessHoursComponent } from './business-hours/business-hours.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
+import { AppointmentListComponent } from './appointment-list/appointment-list.component';
 
 export default [
   { path: 'employees', component: EmployeeListComponent },
@@ -14,5 +15,6 @@ export default [
   { path: 'services/new', component: ServiceEditComponent },
   { path: 'services/edit/:id', component: ServiceEditComponent },
   { path: 'business-hours', component: BusinessHoursComponent },
+  { path: 'appointments', component: AppointmentListComponent },
   { path: '**', redirectTo: '/notfound' },
 ] as Routes;

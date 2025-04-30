@@ -20,6 +20,33 @@
         "new": "Dodaj nową wizytę",
         "edit": "Edytuj wizytę"
       }
+    },
+    "list": {
+      "title": "Lista wizyt",
+      "date": "Data",
+      "status": "Status",
+      "client": "Klient",
+      "service": "Usługa",
+      "dateAndTime": "Data i godzina",
+      "employee": "Pracownik",
+      "duration": "Czas trwania",
+      "price": "Cena",
+      "actions": "Akcje",
+      "loading": "Wczytywanie wizyt...",
+      "error": "Błąd podczas wczytywania wizyt. Spróbuj ponownie później.",
+      "noAppointments": "Nie znaleziono wizyt spełniających kryteria wyszukiwania.",
+      "filter": "Filtruj",
+      "reset": "Resetuj",
+      "export": {
+        "excel": "Excel",
+        "pdf": "PDF"
+      },
+      "selectDate": "Wybierz zakres dat",
+      "selectStatus": "Wybierz status",
+      "selectClient": "Wybierz klienta",
+      "selectService": "Wybierz usługę",
+      "edit": "Edytuj wizytę",
+      "view": "Szczegóły wizyty"
     }
   },
   "auth": {
@@ -48,6 +75,11 @@
     }
   },
   "enum": {
+    "status": {
+      "confirmed": "Potwierdzona",
+      "canceled": "Odwołana",
+      "completed": "Wykonana"
+    },
     "userRole": {
       "CLIENT": "Klient",
       "BUSINESS": "Użytkownik biznesowy"
@@ -129,6 +161,7 @@
   },
   "menu": {
     "dashboard": "Dashboard",
+    "appointments": "Wizyty",
     "employees": "Pracownicy",
     "customers": "Klienci",
     "services": "Usługi",

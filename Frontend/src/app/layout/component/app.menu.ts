@@ -30,6 +30,11 @@ export class AppMenu {
                 routerLink: ['/pages'],
                 items: [
                     {
+                        label: 'menu.appointments',
+                        icon: 'pi pi-fw pi-calendar',
+                        routerLink: ['/pages/appointments']
+                    },
+                    {
                         label: 'menu.employees',
                         icon: 'pi pi-fw pi-users',
                         routerLink: ['/pages/employees']
