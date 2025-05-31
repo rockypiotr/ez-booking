@@ -1,12 +1,12 @@
 import { Component, ElementRef } from '@angular/core';
 import { Avatar } from 'primeng/avatar';
-import { Button, ButtonDirective } from 'primeng/button';
+import { Button } from 'primeng/button';
 import { AppMenu } from './app.menu';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [AppMenu, ButtonDirective, Button, Avatar],
+  imports: [AppMenu, Button, Avatar],
   template: ` <div class="layout-sidebar shadow-lg">
     <div class="pt-3 pb-8">
       <i class=""></i>
