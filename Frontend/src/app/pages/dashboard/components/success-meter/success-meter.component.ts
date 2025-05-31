@@ -8,8 +8,6 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Badge } from 'primeng/badge';
-import { Button } from 'primeng/button';
 import { Card } from 'primeng/card';
 import { Divider } from 'primeng/divider';
 import { SuccessMeter } from '../../../../@shared/models/success-meter';
@@ -17,7 +15,7 @@ import { SuccessMeterService } from '../../../service/success-meter.service';
 
 @Component({
   selector: 'app-success-meter',
-  imports: [Card, Button, Divider, Badge],
+  imports: [Card, Divider],
   templateUrl: './success-meter.component.html',
   styleUrl: './success-meter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
