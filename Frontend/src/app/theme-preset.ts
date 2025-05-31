@@ -1,7 +1,7 @@
 import { definePreset } from '@primeng/themes';
-import Aura from '@primeng/themes/aura';
+import Lara from '@primeng/themes/lara';
 
-export const themePreset = definePreset(Aura, {
+export const themePreset = definePreset(Lara, {
   primitive: {
     borderRadius: {
       none: '0',
@@ -311,17 +311,17 @@ export const themePreset = definePreset(Aura, {
     iconSize: '1rem',
     anchorGutter: '2px',
     primary: {
-      50: '#f2f3f3',
-      100: '#c2c3c5',
-      200: '#929497',
-      300: '#626569',
-      400: '#32363b',
-      500: '#02070d',
-      600: '#02060b',
-      700: '#010509',
-      800: '#010407',
-      900: '#010305',
-      950: '#010203',
+      50: '#faf5ff',
+      100: '#f3e8ff',
+      200: '#e9d5ff',
+      300: '#d8b4fe',
+      400: '#c084fc',
+      500: '#a855f7',
+      600: '#9333ea',
+      700: '#7e22ce',
+      800: '#6b21a8',
+      900: '#581c87',
+      950: '#3b0764',
     },
     formField: {
       paddingX: '0.75rem',

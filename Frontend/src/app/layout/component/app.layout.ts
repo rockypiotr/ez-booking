@@ -10,15 +10,14 @@ import { LayoutService } from '../service/layout.service';
 @Component({
     selector: 'app-layout',
     standalone: true,
-    imports: [CommonModule, AppTopbar, AppSidebar, RouterModule, AppFooter],
-    template: `<div class="layout-wrapper" [ngClass]="containerClass">
-        <app-topbar></app-topbar>
+    imports: [CommonModule, AppSidebar, RouterModule],
+    template: `
+    <div class="layout-wrapper" [ngClass]="containerClass">
         <app-sidebar></app-sidebar>
         <div class="layout-main-container">
             <div class="layout-main">
                 <router-outlet></router-outlet>
             </div>
-            <app-footer></app-footer>
         </div>
         <div class="layout-mask animate-fadein"></div>
     </div> `
@@ -56,6 +55,16 @@ export class AppLayout {
         });
     }
 
+    get containerClass() {
+        return {
+            'layout-overlay': this.layoutService.layoutConfig().menuMode === 'overlay',
+            'layout-static': this.layoutService.layoutConfig().menuMode === 'static',
+            'layout-static-inactive': this.layoutService.layoutState().staticMenuDesktopInactive && this.layoutService.layoutConfig().menuMode === 'static',
+            'layout-overlay-active': this.layoutService.layoutState().overlayMenuActive,
+            'layout-mobile-active': this.layoutService.layoutState().staticMenuMobileActive
+        };
+    }
+
     isOutsideClicked(event: MouseEvent) {
         const sidebarEl = document.querySelector('.layout-sidebar');
         const topbarEl = document.querySelector('.layout-menu-button');
@@ -87,16 +96,6 @@ export class AppLayout {
         } else {
             document.body.className = document.body.className.replace(new RegExp('(^|\\b)' + 'blocked-scroll'.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
         }
-    }
-
-    get containerClass() {
-        return {
-            'layout-overlay': this.layoutService.layoutConfig().menuMode === 'overlay',
-            'layout-static': this.layoutService.layoutConfig().menuMode === 'static',
-            'layout-static-inactive': this.layoutService.layoutState().staticMenuDesktopInactive && this.layoutService.layoutConfig().menuMode === 'static',
-            'layout-overlay-active': this.layoutService.layoutState().overlayMenuActive,
-            'layout-mobile-active': this.layoutService.layoutState().staticMenuMobileActive
-        };
     }
 
     ngOnDestroy() {
