@@ -1,7 +1,8 @@
 <p-card>
-  <div class="flex grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 grid flex-row justify-between gap-6">
+  <div class="flex grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid flex-row justify-around gap-6">
     @for (meter of meters(); track meter.label) {
-      <div class="flex flex-grow-1">
+      <div class="flex"
+           [ngClass]="{'md:col-span-2 xl:col-span-1 md:justify-self-center': $last}">
         <div class="flex gap-6">
           <i [class]="'pi ' + meter.icon" class="text-purple-500 bg-purple-50 shadow-sm rounded-full p-6"
              style="font-size: 5rem"></i>

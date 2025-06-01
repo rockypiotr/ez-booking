@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,7 +15,7 @@ import { SuccessMeterService } from '../../../service/success-meter.service';
 
 @Component({
   selector: 'app-success-meter',
-  imports: [Card],
+  imports: [Card, NgClass],
   templateUrl: './success-meter.component.html',
   styleUrl: './success-meter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
