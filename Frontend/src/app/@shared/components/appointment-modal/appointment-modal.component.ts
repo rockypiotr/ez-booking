@@ -3,7 +3,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrimeTemplate } from 'primeng/api';
 import { ButtonDirective } from 'primeng/button';
-import { Calendar } from 'primeng/calendar';
 import { Chip } from 'primeng/chip';
 import { DatePicker } from 'primeng/datepicker';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -18,7 +17,6 @@ import { CLIENTS, EMPLOYERS, SERVICES } from './appointment-modal.data';
   selector: 'app-appointment-modal',
   imports: [
     Select,
-    Calendar,
     Chip,
     Textarea,
     ButtonDirective,

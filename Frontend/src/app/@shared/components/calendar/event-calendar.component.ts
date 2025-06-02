@@ -20,7 +20,7 @@ export class EventCalendarComponent {
   employers = input.required<CalendarResource[]>();
   events = input<CalendarEvent[]>([]);
   selectedDate = model<Date>(new Date());
-  selectedResource = input<string | null>();
+  selectedResource = input<string | null>(null);
   customWeekdays = input<string[] | null>(null);
   slotClicked = output<CalendarSlot>();
   viewMode = signal<CalendarViewMode>(CalendarViewMode.DAY);
