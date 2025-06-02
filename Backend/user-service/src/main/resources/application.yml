@@ -1,12 +1,12 @@
 server:
-  port: 8081
+  port: 8080
 
 spring:
   application:
     name: user-service
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/userdb
+    url: ${SPRING_DATASOURCE_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
 
