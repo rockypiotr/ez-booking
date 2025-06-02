@@ -15,6 +15,12 @@
     }
   },
   "appointment": {
+    "tab": {
+      "UPCOMING": "Nadchodzące",
+      "PENDING": "Oczekujące",
+      "PAST": "Przeszłe",
+      "CANCELLED": "Anulowane"
+    },
     "modal": {
       "header": {
         "new": "Dodaj nową wizytę",

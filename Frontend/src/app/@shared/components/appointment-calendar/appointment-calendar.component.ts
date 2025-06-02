@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { add } from 'date-fns';
+import { Card } from 'primeng/card';
 import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AppointmentModalComponent } from '../appointment-modal/appointment-modal.component';
 import { EMPLOYERS } from '../appointment-modal/appointment-modal.data';
@@ -11,7 +12,7 @@ import { CalendarSlot } from '../calendar/models/calendar-slot';
 
 @Component({
   selector: 'app-appointment-calendar',
-  imports: [CalendarComponent, DynamicDialogModule],
+  imports: [CalendarComponent, DynamicDialogModule, Card],
   providers: [DialogService, TranslateService],
   templateUrl: './appointment-calendar.component.html',
   styleUrl: './appointment-calendar.component.scss',

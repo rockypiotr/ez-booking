@@ -1,5 +1,7 @@
-<app-calendar
-  (slotClicked)="processAppointment($event)"
-  [events]="events"
-  [resources]="resources"
-></app-calendar>
+<p-card>
+  <app-calendar
+    (slotClicked)="processAppointment($event)"
+    [employers]="resources"
+    [events]="events"
+  ></app-calendar>
+</p-card>

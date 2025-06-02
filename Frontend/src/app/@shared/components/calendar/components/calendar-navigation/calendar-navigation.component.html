@@ -1,0 +1,20 @@
+<div class="mb-6 grid gap-y-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center justify-center flex">
+  <app-calendar-period [(selectedDate)]="selectedDate" [viewMode]="viewMode()"/>
+
+  <div class="flex justify-center md:justify-end xl:justify-center">
+    <p-selectButton [(ngModel)]="viewMode" [options]="viewModes" [unselectable]="true">
+      <ng-template #item let-item>
+        {{ item | translate }}
+      </ng-template>
+    </p-selectButton>
+  </div>
+
+  <p-multiSelect
+    [(ngModel)]="selectedEmployers"
+    [options]="employers()"
+    class="resource-selector"
+    optionLabel="name"
+    optionValue="id"
+    placeholder="Wybierz pracowników"
+  ></p-multiSelect>
+</div>
