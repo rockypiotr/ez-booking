@@ -18,7 +18,7 @@
         >
           day-number
           <span class="day-number">{{ day.number }}</span>
-          @for (event of getEventsForDay(day.date); track event.id) {
+          @for (event of (events() | eventsForDayFilter :day.date : selectedResource()); track event.id) {
             <div class="event">{{ event.time }} - {{ event.title }}</div>
           }
         </div>
@@ -34,12 +34,12 @@
       @for (day of daysInView(); track day.date) {
         <div class="day-column">
           <div class="day-name">
-            {{ weekdays()[day.date.getDay() === 0 ? 6 : day.date.getDay() - 1] }} {{ day.number }}
+            {{ day.date | weekdayName : weekdays() }} {{ day.number }}
           </div>
           <div class="time-wrapper">
             @for (hour of workingHours(); track hour) {
               <div (click)="openSlotDialog(day.date, hour)" class="time-cell">
-                @for (event of getEventsForDayAndHour(day.date, hour); track event.id) {
+                @for (event of (events() | eventsFilter :day.date:hour:selectedResource()); track event.id) {
                   <div class="event" [style.height.px]="60">
                     {{ event.title }}
                   </div>

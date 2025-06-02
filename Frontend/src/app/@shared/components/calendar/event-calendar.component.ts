@@ -1,5 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, input, model, output, Signal, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  model,
+  output,
+  Signal,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { CalendarNavigationComponent } from './components/calendar-navigation/calendar-navigation.component';
@@ -7,13 +17,24 @@ import { CalendarEvent } from './models/calendar-event';
 import { CalendarResource } from './models/calendar-resource';
 import { CalendarSlot } from './models/calendar-slot';
 import { CalendarViewMode } from './models/calendar-view-mode';
+import { EventsFilterPipe } from './pipes/events-filter.pipe';
+import { EventsForDayFilterPipe } from './pipes/events-for-day-filter.pipe';
+import { WeekdayNamePipe } from './pipes/weekday-name.pipe';
 
 @Component({
   selector: 'app-event-calendar',
-  imports: [CommonModule, FormsModule, CalendarNavigationComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    CalendarNavigationComponent,
+    WeekdayNamePipe,
+    EventsFilterPipe,
+    EventsForDayFilterPipe,
+  ],
   templateUrl: './event-calendar.component.html',
   standalone: true,
   styleUrl: './event-calendar.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventCalendarComponent {
   employers = input.required<CalendarResource[]>();
@@ -57,25 +78,6 @@ export class EventCalendarComponent {
       new Intl.DateTimeFormat(this.locale, { weekday: 'short' }).format(new Date(2023, 0, 2 + i))
     );
   });
-
-  getEventsForDay(date: Date) {
-    const selectedResourceId = this.selectedResource();
-    return this.events().filter((event) => {
-      const isSameDay = event.date.toDateString() === date.toDateString();
-      return isSameDay && (!selectedResourceId || event.resourceId === selectedResourceId);
-    });
-  }
-
-  getEventsForDayAndHour(date: Date, hour: string) {
-    const selectedResourceId = this.selectedResource();
-    return this.events().filter((event: any) => {
-      const isSameDay = event.date.toDateString() === date.toDateString();
-      const isSameHour = event.time === hour;
-      return (
-        isSameDay && isSameHour && (!selectedResourceId || event.resourceId === selectedResourceId)
-      );
-    });
-  }
 
   openSlotDialog(date: Date, hour?: string): void {
     this.slotClicked.emit({ date, hour });
