@@ -37,7 +37,6 @@ import { LayoutService } from '../service/layout.service';
       @if (item.routerLink && !item.items && item.visible !== false) {
         <a
           (click)="itemClick($event)"
-          class="bg-primary-100"
           [ngClass]="item.styleClass"
           [routerLink]="item.routerLink"
           routerLinkActive="active-route"

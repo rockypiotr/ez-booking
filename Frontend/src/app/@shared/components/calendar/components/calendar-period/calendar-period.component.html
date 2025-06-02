@@ -1,0 +1,27 @@
+<div class="flex flex-row items-center justify-center md:justify-start gap-1">
+  <p-button
+    (click)="previousPeriod()"
+    icon="pi pi-chevron-left"
+    rounded
+    styleClass="p-button-text"
+  ></p-button>
+  <span class="text-2xl font-bold">
+    @switch (viewMode()) {
+      @case (CalendarViewMode.MONTH) {
+        {{ currentMonthName() }} {{ currentYear() }}
+      }
+      @case (CalendarViewMode.WEEK) {
+        Tydzień {{ selectedDate().getDate() }} {{ currentMonthName() }}
+      }
+      @case (CalendarViewMode.DAY) {
+        {{ selectedDate().getDate() }} {{ currentMonthName() }}
+      }
+    }
+  </span>
+  <p-button
+    (click)="nextPeriod()"
+    icon="pi pi-chevron-right"
+    rounded
+    styleClass="p-button-text"
+  ></p-button>
+</div>
