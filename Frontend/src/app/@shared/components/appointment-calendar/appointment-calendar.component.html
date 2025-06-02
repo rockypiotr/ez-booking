@@ -1,7 +1,7 @@
 <p-card>
-  <app-calendar
-    (slotClicked)="processAppointment($event)"
-    [employers]="resources"
-    [events]="events"
-  ></app-calendar>
+  <app-event-calendar
+    (slotClicked)="openAppointment($event)"
+    [employers]="employers()"
+    [events]="appointments()"
+  ></app-event-calendar>
 </p-card>

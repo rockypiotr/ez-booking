@@ -1,15 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  computed,
-  EventEmitter,
-  inject,
-  input,
-  model,
-  Output,
-  Signal,
-  signal,
-} from '@angular/core';
+import { Component, computed, inject, input, model, output, Signal, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { CalendarNavigationComponent } from './components/calendar-navigation/calendar-navigation.component';
@@ -19,19 +9,19 @@ import { CalendarSlot } from './models/calendar-slot';
 import { CalendarViewMode } from './models/calendar-view-mode';
 
 @Component({
-  selector: 'app-calendar',
+  selector: 'app-event-calendar',
   imports: [CommonModule, FormsModule, CalendarNavigationComponent],
-  templateUrl: './calendar.component.html',
+  templateUrl: './event-calendar.component.html',
   standalone: true,
-  styleUrl: './calendar.component.scss',
+  styleUrl: './event-calendar.component.scss',
 })
-export class CalendarComponent {
+export class EventCalendarComponent {
   employers = input.required<CalendarResource[]>();
   events = input<CalendarEvent[]>([]);
   workingHours = input<string[]>(Array.from({ length: 18 }, (_, i) => `${i + 6}:00`));
   selectedDate = model<Date>(new Date());
   customWeekdays = input<string[] | null>(null);
-  @Output() slotClicked = new EventEmitter<CalendarSlot>();
+  slotClicked = output<CalendarSlot>();
   selectedResource = signal<string | null>(null);
   viewMode = signal<CalendarViewMode>(CalendarViewMode.DAY);
   currentTimePosition = computed(() => {
