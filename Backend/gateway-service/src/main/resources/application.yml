@@ -9,11 +9,11 @@ spring:
     gateway:
       routes:
         - id: user-service
-          uri: http://localhost:8081
+          uri: http://user-service:8080
           predicates:
             - Path=/auth/**
 
-        - id: provider-service
-          uri: http://localhost:8082
+        - id: business-service
+          uri: http://business-service:8080
           predicates:
             - Path=/business/**

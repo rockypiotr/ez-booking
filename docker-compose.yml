@@ -1,0 +1,75 @@
+version: "3.8"
+
+services:
+  gateway-service:
+    build:
+      context: ./Backend/gateway-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - user-service
+      - business-service
+
+  user-service:
+    build:
+      context: ./Backend/user-service
+    environment:
+      - DB_USERNAME=user
+      - DB_PASSWORD=secret
+      - JWT_SECRET=example-secret
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://user-db:5432/userdb
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=secret
+    ports:
+      - "8081:8080"
+    depends_on:
+      - user-db
+
+  user-db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=userdb
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=secret
+    volumes:
+      - user-data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+
+  business-service:
+    build:
+      context: ./Backend/business-service
+    environment:
+      - DB_USERNAME=business
+      - DB_PASSWORD=secret
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://business-db:5432/businessdb
+      - SPRING_DATASOURCE_USERNAME=business
+      - SPRING_DATASOURCE_PASSWORD=secret
+    ports:
+      - "8082:8080"
+    depends_on:
+      - business-db
+
+  business-db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=businessdb
+      - POSTGRES_USER=business
+      - POSTGRES_PASSWORD=secret
+    volumes:
+      - business-data:/var/lib/postgresql/data
+    ports:
+      - "5435:5432"
+
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    depends_on:
+      - gateway-service
+
+volumes:
+  user-data:
+  business-data:
