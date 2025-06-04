@@ -46,17 +46,7 @@ export class CalendarGridComponent {
         throw new Error('Unknown view mode');
     }
   });
-  currentTimePosition = computed(() => {
-    const now = new Date();
-    const currentHour = now.getHours();
-    const currentMinutes = now.getMinutes();
-    const startHour = parseInt(this.workingHours()[0].split(':')[0], 10);
-    const slotHeight = 60;
-    const hoursFromStart = currentHour - startHour + currentMinutes / 60;
-    return hoursFromStart >= 0 && hoursFromStart <= this.workingHours.length
-      ? hoursFromStart * slotHeight
-      : -1;
-  });
+  currentTimePosition = computed(() => this.getCurrentTimePosition());
   protected readonly CalendarViewMode = CalendarViewMode;
   private readonly translateService = inject(TranslateService);
   private readonly locale: string = this.translateService.currentLang;
@@ -126,5 +116,19 @@ export class CalendarGridComponent {
     }
 
     return days;
+  }
+
+  private getCurrentTimePosition() {
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinutes = now.getMinutes();
+
+    const startHour: number = parseInt(this.workingHours()[0].split(':')[0], 10);
+    const slotHeight = 60;
+    const hoursFromStart: number = currentHour - startHour + currentMinutes / 60;
+
+    return hoursFromStart >= 0 && hoursFromStart <= this.workingHours().length
+      ? hoursFromStart * slotHeight
+      : -1;
   }
 }
