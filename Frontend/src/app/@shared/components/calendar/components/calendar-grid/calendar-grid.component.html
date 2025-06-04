@@ -13,7 +13,6 @@
         [class.inactive]="!day.isCurrentMonth"
         class="day-cell"
       >
-        day-number
         <span class="day-number">{{ day.number }}</span>
         @for (event of (events() | eventsForDayFilter :day.date : selectedResource()); track event.id) {
           <div class="event">{{ event.time }} - {{ event.title }}</div>
@@ -37,8 +36,11 @@
           @for (hour of workingHours(); track hour) {
             <div (click)="slotClicked.emit({date: day.date, hour: hour})" class="time-cell">
               @for (event of (events() | eventsFilter : day.date : hour : selectedResource()); track event.id) {
-                <div class="event" [style.height.px]="60">
-                  {{ event.title }}
+                <div class="flex flex-col shadow-sm rounded-xl pointer" [style.height.px]="60">
+                  <span
+                    class="bg-purple-400 rounded-t-xl text-white text-shadow-sm font-bold px-4 py-1">{{ event.time }}
+                    </span>
+                  <span class="bg-purple-100 rounded-b-xl h-full px-4 pt-1">{{ event.title }}</span>
                 </div>
               }
             </div>
