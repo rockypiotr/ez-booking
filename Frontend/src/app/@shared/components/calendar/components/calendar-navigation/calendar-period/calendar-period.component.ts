@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, model } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Button } from 'primeng/button';
-import { CalendarViewMode } from '../../models/calendar-view-mode';
+import { CalendarViewMode } from '../../../models/calendar-view-mode';
 
 @Component({
   selector: 'app-calendar-period',

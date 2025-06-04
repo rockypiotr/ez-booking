@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { add } from 'date-fns';
 import { Card } from 'primeng/card';
 import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { filter } from 'rxjs/operators';
 import { AppointmentModalComponent } from '../appointment-modal/appointment-modal.component';
 import { EMPLOYERS } from '../appointment-modal/appointment-modal.data';
 import { EventCalendarComponent } from '../calendar/event-calendar.component';
@@ -59,8 +60,13 @@ export class AppointmentCalendarComponent implements OnDestroy, OnInit {
       maskStyleClass: 'backdrop-blur-sm',
     });
 
-    this.ref.onClose.subscribe((event: CalendarEvent) => {
-      if (event) this.appointments.update((appointments) => [...appointments, event]);
+    this.ref.onClose.pipe(filter((event) => event)).subscribe((event: unknown) => {
+      console.log('event', event);
+      if (event)
+        this.appointments.update((appointments) => [
+          ...appointments,
+          this.getAppointmentData(event),
+        ]);
     });
   }
 
@@ -75,5 +81,16 @@ export class AppointmentCalendarComponent implements OnDestroy, OnInit {
         name: first_name + ' ' + last_name,
       }))
     );
+  }
+
+  private getAppointmentData(event: any): CalendarEvent {
+    return {
+      id: event.client_id,
+      date: event.service_date,
+      time: event.service_time || '13:00',
+      resourceId: event.employee_id,
+      title: event.notes,
+      duration: 1,
+    };
   }
 }

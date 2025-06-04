@@ -5,7 +5,7 @@ import { MultiSelect } from 'primeng/multiselect';
 import { SelectButton } from 'primeng/selectbutton';
 import { CalendarResource } from '../../models/calendar-resource';
 import { CalendarViewMode } from '../../models/calendar-view-mode';
-import { CalendarPeriodComponent } from '../calendar-period/calendar-period.component';
+import { CalendarPeriodComponent } from './calendar-period/calendar-period.component';
 
 @Component({
   selector: 'app-calendar-navigation',
