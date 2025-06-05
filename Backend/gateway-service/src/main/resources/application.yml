@@ -15,5 +15,5 @@ spring:
 
         - id: business-service
           uri: http://business-service:8080
-          predicates:
-            - Path=/business/**
+          predicates:            - Path=/business/**
+            - Path=/client/**

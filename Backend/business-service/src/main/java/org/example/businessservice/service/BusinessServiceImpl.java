@@ -10,6 +10,7 @@ import org.example.businessservice.repository.BusinessRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -26,6 +27,11 @@ public class BusinessServiceImpl implements BusinessService {
         log.info("Created new business: {}", savedBusiness.getName());
 
         return buildRegisterBusinessResponse(savedBusiness);
+    }
+
+    @Override
+    public Business getBusinessById(UUID id) {
+        return businessRepository.findById(id).orElse(null);
     }
 
     public void validateAddBusinessRequest(RegisterRequest request) {
