@@ -51,9 +51,9 @@ public class BusinessServiceImpl implements BusinessService {
                 .ownerId(request.getOwnerId())
                 .name(request.getName())
                 .websiteUrl(request.getWebsiteUrl())
-                .services(request.getServices())
                 .active(request.getActive())
                 .createdAt(LocalDateTime.now())
+                .offerings(null)
                 .build();
     }
 
@@ -62,8 +62,8 @@ public class BusinessServiceImpl implements BusinessService {
                 .ownerId(savedBusiness.getOwnerId())
                 .name(savedBusiness.getName())
                 .websiteUrl(savedBusiness.getWebsiteUrl())
-                .services(savedBusiness.getServices())
                 .createdAt(savedBusiness.getCreatedAt())
+                .offerings(null)
                 .build();
     }
 }

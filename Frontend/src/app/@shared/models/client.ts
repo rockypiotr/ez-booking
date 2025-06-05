@@ -1,5 +1,5 @@
 export interface Client{
-    userId: string
+    clientId: string
     createdAt: Date
     updatedAt: Date
     businessId: string

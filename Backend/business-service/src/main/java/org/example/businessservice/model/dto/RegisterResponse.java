@@ -19,6 +19,6 @@ public class RegisterResponse {
     private String name;
     private String websiteUrl;
     private Boolean active;
-    private List<String> services;
+    private List<String> offerings;
     private LocalDateTime createdAt;
 }

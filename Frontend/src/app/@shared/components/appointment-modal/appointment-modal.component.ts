@@ -79,7 +79,7 @@ export class AppointmentModalComponent implements OnInit {
     .subscribe((newClient: Client) => {
       if (newClient) {
         this.clients = [...this.clients, newClient];
-        this.form.get('client_id')?.setValue(newClient.userId);
+        this.form.get('client_id')?.setValue(newClient.clientId);
       }
     });
   }

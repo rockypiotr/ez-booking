@@ -17,8 +17,8 @@ import java.util.UUID;
 public class Client {
 
     @Id
-    @GeneratedValue()
-    private UUID userId;
+    @GeneratedValue
+    private UUID clientId;
 
     @ManyToOne
     @JoinColumn(name = "business_id", nullable = false)

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,7 +19,7 @@ import java.util.UUID;
 @Table(name = "business")
 public class Business {
     @Id
-    @GeneratedValue()
+    @GeneratedValue
     private UUID id;
 
     @Column(nullable = false)
@@ -31,6 +32,6 @@ public class Business {
     private Boolean active;
     private LocalDateTime createdAt;
 
-    @ElementCollection
-    private List<String> services;
+    @OneToMany(mappedBy = "business", cascade = CascadeType.ALL)
+    private List<BusinessOffering> offerings = new ArrayList<>();
 }
