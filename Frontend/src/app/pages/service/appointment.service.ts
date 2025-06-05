@@ -66,10 +66,27 @@ export class AppointmentService {
   }
 
   getAvailableVisits(): Observable<string[]> {
-    // return this.http.post<AvailableAppointmentsResponse>(
-    //   `${this.apiUrl}/appointment/available-visits`,
-    //   appointmentData
-    // );
-    return of(['10:20', '11:20', '15:30', '15:45', '16:00']);
+    return this.getRandomTimes(7);
+  }
+
+  getRandomTimes(count: number = 5): Observable<string[]> {
+    const times: string[] = [];
+
+    for (let i = 0; i < count; i++) {
+      const hour = Math.floor(Math.random() * 24);
+      const minute = Math.floor(Math.random() * 60);
+      const formattedTime = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+      times.push(formattedTime);
+    }
+
+    times.sort((a, b) => {
+      const [hourA, minuteA] = a.split(':').map(Number);
+      const [hourB, minuteB] = b.split(':').map(Number);
+      const timeA = hourA * 60 + minuteA;
+      const timeB = hourB * 60 + minuteB;
+      return timeA - timeB;
+    });
+
+    return of(times);
   }
 }
