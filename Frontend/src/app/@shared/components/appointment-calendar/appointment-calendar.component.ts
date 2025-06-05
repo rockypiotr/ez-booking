@@ -17,6 +17,7 @@ import { EventCalendarComponent } from '../calendar/event-calendar.component';
 import { CalendarEvent } from '../calendar/models/calendar-event';
 import { CalendarResource } from '../calendar/models/calendar-resource';
 import { CalendarSlot } from '../calendar/models/calendar-slot';
+import { ToastService } from '../../../@core/services/common/toast.service';
 
 @Component({
   selector: 'app-appointment-calendar',
@@ -40,6 +41,7 @@ export class AppointmentCalendarComponent implements OnDestroy, OnInit {
   ]);
   private readonly translateService = inject(TranslateService);
   private readonly dialogService = inject(DialogService);
+  private readonly toastService = inject(ToastService);
   private ref: DynamicDialogRef<AppointmentModalComponent> | undefined;
 
   ngOnInit() {
@@ -62,6 +64,7 @@ export class AppointmentCalendarComponent implements OnDestroy, OnInit {
 
     this.ref.onClose.pipe(filter((event) => event)).subscribe((event: unknown) => {
       console.log('event', event);
+      this.toastService.showSuccess('success');
       if (event)
         this.appointments.update((appointments) => [
           ...appointments,

@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withHashLocation, withInMemoryScrolling } from '@angular/router';
 
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
@@ -14,6 +14,8 @@ import { appReducers } from './@core/store/app.state';
 import { AuthEffects } from './@core/store/auth/auth.effects';
 import { routes } from './app.routes';
 import { themePreset } from './theme-preset';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   return localStorageSync({ keys: ['auth'], rehydrate: true })(reducer);
@@ -53,5 +55,6 @@ export const appConfig: ApplicationConfig = {
     }),
     provideStore(appReducers, { metaReducers }),
     provideEffects([AuthEffects]),
+    MessageService,
   ],
 };

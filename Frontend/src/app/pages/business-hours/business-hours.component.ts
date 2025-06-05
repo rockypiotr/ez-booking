@@ -18,6 +18,7 @@ import { CardModule } from 'primeng/card';
 import { DividerModule } from 'primeng/divider';
 import { format } from 'date-fns';
 import { ToggleSwitch } from 'primeng/toggleswitch';
+import { ToastService } from '../../@core/services/common/toast.service';
 
 @Component({
   selector: 'app-business-hours',
@@ -40,7 +41,7 @@ import { ToggleSwitch } from 'primeng/toggleswitch';
     DividerModule,
     ToggleSwitch,
   ],
-  providers: [ConfirmationService, MessageService],
+  providers: [ConfirmationService, ToastService],
   templateUrl: './business-hours.component.html'
 })
 export class BusinessHoursComponent implements OnInit {
@@ -78,7 +79,7 @@ export class BusinessHoursComponent implements OnInit {
   // Services
   private readonly businessHoursService = inject(BusinessHoursService);
   private readonly fb = inject(FormBuilder);
-  private readonly messageService = inject(MessageService);
+  private readonly toastService = inject(ToastService);
   private readonly confirmationService = inject(ConfirmationService);
   private readonly translateService = inject(TranslateService);
 
@@ -164,11 +165,11 @@ export class BusinessHoursComponent implements OnInit {
    */
   saveBusinessHours(): void {
     if (this.weeklyScheduleForm.invalid) {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'business-hours.validationError'
-      });
+      // this.toastService.add({
+      //   severity: 'error',
+      //   summary: 'Error',
+      //   detail: 'business-hours.validationError'
+      // });
       return;
     }
 
@@ -179,20 +180,12 @@ export class BusinessHoursComponent implements OnInit {
       next: (result) => {
         this.businessHours = result;
         this.saving = false;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'business-hours.success',
-          detail: 'business-hours.saveSuccess'
-        });
+        this.toastService.showSuccess('business-hours.saveSuccess');
       },
       error: (err) => {
         console.error('Error saving business hours', err);
         this.saving = false;
-        this.messageService.add({
-          severity: 'error',
-          summary: 'business-hours.error',
-          detail: 'business-hours.saveFailed'
-        });
+        this.toastService.showError('business-hours.saveFailed');
       }
     });
   }
@@ -260,11 +253,7 @@ export class BusinessHoursComponent implements OnInit {
           }
         });
 
-        this.messageService.add({
-          severity: 'success',
-          summary: this.translateService.instant('message.severity.success'),
-          detail: 'business-hours.settingsApplied'
-        });
+        this.toastService.showSuccess('business-hours.settingsApplied');
       }
     });
   }
@@ -283,11 +272,11 @@ export class BusinessHoursComponent implements OnInit {
    */
   addSpecialClosureDay(): void {
     if (!this.specialClosureDayDate || !this.specialClosureDayName.trim()) {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'business-hours.error',
-        detail: 'business-hours.missingDateOrName'
-      });
+      // this.toastService.add({
+      //   severity: 'error',
+      //   summary: 'business-hours.error',
+      //   detail: 'business-hours.missingDateOrName'
+      // });
       return;
     }
 
@@ -295,11 +284,11 @@ export class BusinessHoursComponent implements OnInit {
 
     // Check if date already exists
     if (this.businessHours?.specialClosureDays.some(day => day.date === date)) {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'business-hours.error',
-        detail: 'business-hours.dateAlreadyExists'
-      });
+      // this.toastService.add({
+      //   severity: 'error',
+      //   summary: 'business-hours.error',
+      //   detail: 'business-hours.dateAlreadyExists'
+      // });
       return;
     }
 
@@ -319,19 +308,19 @@ export class BusinessHoursComponent implements OnInit {
         }
 
         this.showSpecialClosureDayDialog = false;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'business-hours.success',
-          detail: 'business-hours.closureDayAdded'
-        });
+        // this.toastService.add({
+        //   severity: 'success',
+        //   summary: 'business-hours.success',
+        //   detail: 'business-hours.closureDayAdded'
+        // });
       },
       error: (err) => {
         console.error('Error adding special closure day', err);
-        this.messageService.add({
-          severity: 'error',
-          summary: 'business-hours.error',
-          detail: 'business-hours.closureDayAddFailed'
-        });
+        // this.toastService.add({
+        //   severity: 'error',
+        //   summary: 'business-hours.error',
+        //   detail: 'business-hours.closureDayAddFailed'
+        // });
       }
     });
   }
@@ -355,19 +344,19 @@ export class BusinessHoursComponent implements OnInit {
               };
             }
 
-            this.messageService.add({
-              severity: 'success',
-              summary: 'business-hours.success',
-              detail: 'business-hours.closureDayDeleted'
-            });
+            // this.messageService.add({
+            //   severity: 'success',
+            //   summary: 'business-hours.success',
+            //   detail: 'business-hours.closureDayDeleted'
+            // });
           },
           error: (err) => {
             console.error('Error deleting special closure day', err);
-            this.messageService.add({
-              severity: 'error',
-              summary: 'business-hours.error',
-              detail: 'business-hours.closureDayDeleteFailed'
-            });
+            // this.messageService.add({
+            //   severity: 'error',
+            //   summary: 'business-hours.error',
+            //   detail: 'business-hours.closureDayDeleteFailed'
+            // });
           }
         });
       }
