@@ -1,69 +1,12 @@
 <form (ngSubmit)="onSave()" [formGroup]="form">
   <fieldset class="space-y-8 mb-6">
     <div class="flex flex-col">
-      <label>Klient</label>
-      <p-select
-        [filter]="true"
-        [options]="clients"
-        appendTo="body"
-        formControlName="client_id"
-        optionLabel="name"
-        optionValue="userId"
-      >
-        <ng-template let-option pTemplate="item">
-          {{ option.name }}
-          <span class="text-primary">({{ option.phoneNumber }})</span>
-        </ng-template>
-        <ng-template let-option pTemplate="selectedItem">
-            {{ option.name }}
-          <span class="text-primary">({{ option.phoneNumber }})</span>
-        </ng-template>
-
-        <ng-template #footer>
-          <div class="p-3">
-            <button class="select-list-add-button p-select-option" (click)="toggleNewClientForm()">Dodaj nowego klienta</button>
-          </div>
-    </ng-template>
-      </p-select>
+        <label>Imię i nazwisko</label>
+        <input type="text" pInputText formControlName="name" />
     </div>
     <div class="flex flex-col">
-      <label>Wybierz usługę</label>
-      <p-select
-        [filter]="true"
-        [options]="services"
-        appendTo="body"
-        formControlName="service_id"
-        optionLabel="name"
-        optionValue="service_id"
-      ></p-select>
-    </div>
-    <div class="flex flex-col">
-      <label>Wybierz pracownika</label>
-      <p-select
-        (onChange)="setAvailableVisits()"
-        [options]="employers"
-        appendTo="body"
-        formControlName="employee_id"
-        optionLabel="first_name"
-        optionValue="user_id"
-        placeholder=""
-      ></p-select>
-    </div>
-    <div class="flex flex-col">
-      <label>Data wizyty</label>
-      <p-datePicker appendTo="body" dateFormat="dd.mm.yy" formControlName="service_date"></p-datePicker>
-    </div>
-    <div class="flex flex-col">
-      <label class="mb-3 required">Godzina wizyty</label>
-      <div class="flex flex-row gap-2">
-        @for (visit of availableVisits; track visit) {
-          <p-chip [label]="visit"></p-chip>
-        }
-      </div>
-    </div>
-    <div class="flex flex-col">
-      <label>Uwagi dotyczące wizity</label>
-      <textarea formControlName="notes" pTextarea></textarea>
+        <label>Numer telefonu</label>
+        <input type="text" pInputText formControlName="phoneNumber" />
     </div>
   </fieldset>
   <div class="flex justify-end">

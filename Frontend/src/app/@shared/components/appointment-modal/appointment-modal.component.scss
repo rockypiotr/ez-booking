@@ -1,0 +1,11 @@
+.select-list-add-button{
+    height: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.select-list-add-button:hover{
+    background: var(--p-select-option-focus-background);
+    color: var(--p-select-option-focus-color);
+    border-radius: var(--p-select-option-border-radius);
+    cursor: pointer;
+}

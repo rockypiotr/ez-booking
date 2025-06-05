@@ -33,7 +33,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client saveClient(ClientCreateRequest clientCreateRequest) throws ClientPhoneNumberExists {
-        Optional<Client> existingClient = clientRepository.findByPhoneNumber(clientCreateRequest.getPhone());
+        Optional<Client> existingClient = clientRepository.findByPhoneNumber(clientCreateRequest.getPhoneNumber());
         if (existingClient.isPresent()) {
             throw new ClientPhoneNumberExists("Client with phone number '" +
                     existingClient.get().getPhoneNumber() + "' already exists.");
@@ -44,7 +44,7 @@ public class ClientServiceImpl implements ClientService {
     private Client createClientFromRequest(ClientCreateRequest clientCreateRequest) {
         return Client.builder()
                 .name(clientCreateRequest.getName())
-                .phoneNumber(clientCreateRequest.getPhone())
+                .phoneNumber(clientCreateRequest.getPhoneNumber())
                 .business(businessService.getBusinessById(clientCreateRequest.getBusinessId()))
                 .createdAt(LocalDateTime.now())
                 .build();

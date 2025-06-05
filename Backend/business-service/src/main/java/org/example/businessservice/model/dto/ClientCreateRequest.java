@@ -14,5 +14,5 @@ import java.util.UUID;
 public class ClientCreateRequest {
     private UUID businessId;
     private String name;
-    private String phone;
+    private String phoneNumber;
 }

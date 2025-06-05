@@ -18,7 +18,7 @@ public class Client {
 
     @Id
     @GeneratedValue()
-    private UUID id;
+    private UUID userId;
 
     @ManyToOne
     @JoinColumn(name = "business_id", nullable = false)
