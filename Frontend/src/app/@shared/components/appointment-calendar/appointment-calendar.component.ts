@@ -11,13 +11,13 @@ import { add } from 'date-fns';
 import { Card } from 'primeng/card';
 import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { filter } from 'rxjs/operators';
+import { ToastService } from '../../../@core/services/common/toast.service';
 import { AppointmentModalComponent } from '../appointment-modal/appointment-modal.component';
 import { EMPLOYERS } from '../appointment-modal/appointment-modal.data';
 import { EventCalendarComponent } from '../calendar/event-calendar.component';
 import { CalendarEvent } from '../calendar/models/calendar-event';
 import { CalendarResource } from '../calendar/models/calendar-resource';
 import { CalendarSlot } from '../calendar/models/calendar-slot';
-import { ToastService } from '../../../@core/services/common/toast.service';
 
 @Component({
   selector: 'app-appointment-calendar',
@@ -37,6 +37,14 @@ export class AppointmentCalendarComponent implements OnDestroy, OnInit {
       resourceId: '101',
       title: 'Test app',
       duration: 60,
+    },
+    {
+      id: '2',
+      date: add(new Date(), { hours: -5 }),
+      time: '13:30',
+      resourceId: '101',
+      title: 'Test app',
+      duration: 90,
     },
   ]);
   private readonly translateService = inject(TranslateService);
@@ -88,12 +96,12 @@ export class AppointmentCalendarComponent implements OnDestroy, OnInit {
 
   private getAppointmentData(event: any): CalendarEvent {
     return {
-      id: event.client_id,
+      id: event.service_time,
       date: event.service_date,
       time: event.service_time || '13:00',
-      resourceId: event.employee_id,
+      resourceId: 101,
       title: event.notes,
-      duration: 1,
+      duration: 60,
     };
   }
 }
