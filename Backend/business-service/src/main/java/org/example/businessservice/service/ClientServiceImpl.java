@@ -2,6 +2,7 @@ package org.example.businessservice.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.businessservice.exception.ClientPhoneNumberExists;
 import org.example.businessservice.model.dto.ClientCreateRequest;
 import org.example.businessservice.model.entity.Client;
 import org.example.businessservice.repository.ClientRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -30,7 +32,12 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client saveClient(ClientCreateRequest clientCreateRequest) {
+    public Client saveClient(ClientCreateRequest clientCreateRequest) throws ClientPhoneNumberExists {
+        Optional<Client> existingClient = clientRepository.findByPhoneNumber(clientCreateRequest.getPhone());
+        if (existingClient.isPresent()) {
+            throw new ClientPhoneNumberExists("Client with phone number '" +
+                    existingClient.get().getPhoneNumber() + "' already exists.");
+        }
         return clientRepository.save(createClientFromRequest(clientCreateRequest));
     }
 
