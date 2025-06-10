@@ -77,6 +77,10 @@ export class CalendarGridComponent {
     return now.toDateString() === date.toDateString();
   }
 
+  onSlotClicked(date: Date, hour: string): void {
+    this.slotClicked.emit({ date, hour });
+  }
+
   private getDayView(date: Date) {
     return [{ number: date.getDate(), date: new Date(date), isCurrentMonth: true }];
   }
