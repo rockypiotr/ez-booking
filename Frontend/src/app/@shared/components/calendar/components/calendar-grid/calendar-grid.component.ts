@@ -14,11 +14,18 @@ import { CalendarEvent } from '../../models/calendar-event';
 import { CalendarViewMode } from '../../models/calendar-view-mode';
 import { EventsFilterPipe } from '../../pipes/events-filter.pipe';
 import { EventsForDayFilterPipe } from '../../pipes/events-for-day-filter.pipe';
+import { ExtractMinutesPipe } from '../../pipes/extract-minutes.pipe';
 import { WeekdayNamePipe } from '../../pipes/weekday-name.pipe';
 
 @Component({
   selector: 'app-calendar-grid',
-  imports: [EventsFilterPipe, EventsForDayFilterPipe, WeekdayNamePipe, CommonModule],
+  imports: [
+    EventsFilterPipe,
+    EventsForDayFilterPipe,
+    WeekdayNamePipe,
+    CommonModule,
+    ExtractMinutesPipe,
+  ],
   templateUrl: './calendar-grid.component.html',
   styleUrl: './calendar-grid.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -68,6 +75,10 @@ export class CalendarGridComponent {
   isToday(date: Date): boolean {
     const now = new Date();
     return now.toDateString() === date.toDateString();
+  }
+
+  onSlotClicked(date: Date, hour: string): void {
+    this.slotClicked.emit({ date, hour });
   }
 
   private getDayView(date: Date) {

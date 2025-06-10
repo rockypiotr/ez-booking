@@ -1,14 +1,15 @@
 <form (ngSubmit)="onSave()" [formGroup]="form">
   <fieldset class="space-y-8 mb-6">
-    <div class="flex flex-col">
-      <label>Klient</label>
+
+    <!-- Wybierz klienta -->
+    <div class="flex flex-col gap-1">
+      <label>Wybierz klienta</label>
       <p-select
         [filter]="true"
         [options]="clients"
         appendTo="body"
         formControlName="client_id"
-        optionLabel="first_name"
-        optionValue="user_id"
+        optionLabel="first_name" optionValue="user_id"
       >
         <ng-template let-option pTemplate="item">
           {{ option.first_name + ' ' + option.last_name + '&nbsp;' }}
@@ -20,44 +21,54 @@
         </ng-template>
       </p-select>
     </div>
-    <div class="flex flex-col">
+
+    <!-- Wybierz usługę -->
+    <div class="flex flex-col gap-1">
       <label>Wybierz usługę</label>
       <p-select
         [filter]="true"
-        [options]="services"
-        appendTo="body"
+        [options]="services" appendTo="body"
         formControlName="service_id"
         optionLabel="name"
         optionValue="service_id"
-      ></p-select>
+      />
     </div>
-    <div class="flex flex-col">
+    <!-- Wybierz pracownika -->
+    <div class="flex flex-col gap-1">
       <label>Wybierz pracownika</label>
       <p-select
-        (onChange)="setAvailableVisits()"
         [options]="employers"
         appendTo="body"
         formControlName="employee_id"
         optionLabel="first_name"
         optionValue="user_id"
         placeholder=""
-      ></p-select>
+      />
     </div>
-    <div class="flex flex-col">
+
+    <!-- Data i godzina wizyty -->
+    <!-- Kalendarz -->
+    <div class="flex flex-col gap-1">
       <label>Data wizyty</label>
-      <p-datePicker appendTo="body" dateFormat="dd.mm.yy" formControlName="service_date"></p-datePicker>
+      <p-datePicker
+        [minDate]="firstAvailableDate()"
+        appendTo="body"
+        dateFormat="dd.mm.yy"
+        fluid
+        formControlName="service_date"
+        inline
+      />
     </div>
-    <div class="flex flex-col">
-      <label class="mb-3 required">Godzina wizyty</label>
-      <div class="flex flex-row gap-2">
-        @for (visit of availableVisits; track visit) {
-          <p-chip [label]="visit"></p-chip>
-        }
-      </div>
+
+    <!-- Godzina wizyty-->
+    <div class="flex flex-col gap-1">
+      <label>Godzina wizyty</label>
+      <app-time-picker [options]="availableVisits" formControlName="service_time"/>
     </div>
-    <div class="flex flex-col">
-      <label>Uwagi dotyczące wizity</label>
-      <textarea formControlName="notes" pTextarea></textarea>
+    <!-- Uwagi dotyczące wizyty -->
+    <div class="flex flex-col gap-1">
+      <label>Uwagi dotyczące wizyty</label>
+      <textarea [rows]="5" formControlName="notes" pTextarea></textarea>
     </div>
   </fieldset>
   <div class="flex justify-end">

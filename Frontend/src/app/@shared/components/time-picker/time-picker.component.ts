@@ -29,7 +29,7 @@ import { Ripple } from 'primeng/ripple';
   ],
 })
 export class TimePickerComponent implements OnInit, OnChanges, ControlValueAccessor {
-  value: any = undefined;
+  value: unknown = undefined;
   options: InputSignal<any[]> = input.required();
   disabled: InputSignal<boolean> = input(false);
 
