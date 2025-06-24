@@ -1,29 +1,30 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, computed, DestroyRef, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrimeTemplate } from 'primeng/api';
 import { ButtonDirective } from 'primeng/button';
-import { Chip } from 'primeng/chip';
 import { DatePicker } from 'primeng/datepicker';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Select } from 'primeng/select';
 import { Textarea } from 'primeng/textarea';
-import { tap } from 'rxjs';
+import { combineLatest, distinctUntilChanged, tap } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { AppointmentService } from '../../../pages/service/appointment.service';
 import { CalendarEvent } from '../calendar/models/calendar-event';
+import { TimePickerComponent } from '../time-picker/time-picker.component';
 import { CLIENTS, EMPLOYERS, SERVICES } from './appointment-modal.data';
 
 @Component({
   selector: 'app-appointment-modal',
   imports: [
     Select,
-    Chip,
     Textarea,
     ButtonDirective,
     FormsModule,
     PrimeTemplate,
     ReactiveFormsModule,
     DatePicker,
+    TimePickerComponent,
   ],
   providers: [],
   templateUrl: './appointment-modal.component.html',
@@ -35,7 +36,7 @@ export class AppointmentModalComponent implements OnInit {
   services = SERVICES;
   availableVisits: string[] = [];
   form!: FormGroup;
-
+  firstAvailableDate = computed(() => new Date());
   private readonly appointmentService = inject(AppointmentService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly dialogConfig = inject(DynamicDialogConfig);
@@ -43,6 +44,7 @@ export class AppointmentModalComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
+    this.watchForAvailableVisits();
     this.setDate();
   }
 
@@ -79,5 +81,19 @@ export class AppointmentModalComponent implements OnInit {
 
   private validateForm() {
     if (this.form.invalid) throw new Error('Invalid form');
+  }
+
+  private watchForAvailableVisits() {
+    const { service_id, employee_id, service_date } = this.form.controls;
+
+    combineLatest([service_id.valueChanges, employee_id.valueChanges, service_date.valueChanges])
+      .pipe(
+        filter(
+          ([service_id, employee_id, service_date]) => service_id && employee_id && service_date
+        ),
+        distinctUntilChanged(),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(() => this.setAvailableVisits());
   }
 }

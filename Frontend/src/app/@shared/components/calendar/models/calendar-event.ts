@@ -3,6 +3,6 @@ export interface CalendarEvent {
   date: Date;
   time: string;
   duration: number;
-  resourceId: string;
+  resourceId: string | number;
   title: string;
 }
